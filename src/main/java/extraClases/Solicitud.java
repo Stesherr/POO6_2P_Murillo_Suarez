@@ -6,6 +6,8 @@
 package extraClases;
 
 import generalClases.Usuario;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Date;
 
 /**
@@ -34,11 +36,30 @@ public class Solicitud {
     }
     
     public void escribirArchivo(){
-        //escritura de archivo
+        try
+        {File archivo=new File("contratatacionesPruebas.txt");
+        FileWriter escribir=new FileWriter(archivo,true);
+        escribir.write(this.idSolicitud+","+this.usuarioPaciente+","+this.direccion+","+this.fecha+","+this.hora+","+this.ubicacionX+","+this.ubicacionY+","+this.totalPagar+"\n");
+        
+        escribir.close();
+        }catch(Exception e)
+        {
+        System.out.println("Error al escribir");
+        }
+    
     }
     
-    public void detallarArchivo(){
-        //escritura del archivo de detalles de las solicitudes
+    public void detallarArchivo(Prueba p){
+        try
+        {File archivo=new File("detallesSolicitudes.txt");
+        FileWriter escribir=new FileWriter(archivo,true);
+        escribir.write(this.idSolicitud+","+p.codigoPrueba+"\n");
+        
+        escribir.close();
+        }catch(Exception e)
+        {
+        System.out.println("Error al escribir");
+        }
     }
     
     public void enviarCorreo(){
