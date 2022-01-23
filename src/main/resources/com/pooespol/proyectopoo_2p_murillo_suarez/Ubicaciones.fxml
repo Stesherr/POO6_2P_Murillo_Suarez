@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.UbicacionesController">
+   <children>
+      <ImageView fx:id="mapa" fitHeight="400.0" fitWidth="600.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

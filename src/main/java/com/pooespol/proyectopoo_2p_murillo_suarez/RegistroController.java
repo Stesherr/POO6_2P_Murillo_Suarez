@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 /**
@@ -41,6 +42,12 @@ public class RegistroController implements Initializable {
     private TextField contra;
     @FXML
     private DatePicker fNac;
+    @FXML
+    private RadioButton femButton;
+    @FXML
+    private RadioButton masButton;
+    @FXML
+    private RadioButton otroButton;
 
     /**
      * Initializes the controller class.
@@ -52,6 +59,18 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void registrar(ActionEvent event) {
+    }
+
+    @FXML
+    private void femTocado(ActionEvent event) {
+    }
+
+    @FXML
+    private void masTocado(ActionEvent event) {
+    }
+
+    @FXML
+    private void otroTocado(ActionEvent event) {
     }
     
 }
