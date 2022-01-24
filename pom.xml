@@ -20,6 +20,24 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
+        <dependency>
+            <groupId>es.proeycto2.librarymail</groupId>
+            <artifactId>MAIL</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>es.proyecto2.libraryactivation</groupId>
+            <artifactId>Activation</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-guice</artifactId>
+            <version>2.1.7</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

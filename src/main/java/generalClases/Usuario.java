@@ -5,6 +5,8 @@
  */
 package generalClases;
 
+import extraClases.Solicitud;
+
 /**
  *
  * @author josem
@@ -24,6 +26,7 @@ public class Usuario {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
     }
     
 }
