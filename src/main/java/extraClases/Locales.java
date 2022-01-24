@@ -5,6 +5,11 @@
  */
 package extraClases;
 
+import generalClases.Usuario;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -68,9 +73,22 @@ public class Locales {
     
     
     
-    public static ArrayList<Locales> leerArchivo(){
+    public static ArrayList<Locales> leerArchivo(){//horario guarda como vacio
         ArrayList<Locales> lista = new ArrayList<Locales>();
-        //leer archivo de locales
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/imagenes/sucursales.txt/"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String[] line = linea.split("-");
+                lista.add(new Locales("Vithas Labs",line[2],"",Double.parseDouble(line[0]),Double.parseDouble(line[1])));
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        
         return lista;
     }
 }

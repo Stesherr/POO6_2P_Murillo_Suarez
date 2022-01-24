@@ -5,19 +5,22 @@
  */
 package generalClases;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
  *
  * @author josem
  */
-public class Laboratorista {
-
+public class Laboratorista extends Usuario{
+    
     
 
     public Laboratorista(String usuario, String contraseña) {
-        //extiende de usuario, verifica si es L
-        
+        super(usuario, contraseña);
+        super.tipo = "L";
+                
     }
     
     
@@ -30,8 +33,17 @@ public class Laboratorista {
         return lista;
     }
     
-    public void generarArchivo(){
-        //escritura de archivo
+    public void generarArchivo(){//revisar
+        try
+        {File archivo=new File("consolidado.txt");
+        FileWriter escribir=new FileWriter(archivo,true);
+        escribir.write("\n");
+        
+        escribir.close();
+        }catch(Exception e)
+        {
+        System.out.println("Error al escribir el consolidado de citas");
+        }
     }
     
     

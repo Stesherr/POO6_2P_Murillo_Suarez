@@ -25,12 +25,11 @@ public class Paciente extends Usuario{
     public String ciudad;
     public String email;
     public int telefono;
-    public static String tipo = "P";
-    //usuario
-    //contraseña
+    
 
     public Paciente(int cedula, String nombres, String apellidos, Date fnacimiento, String genero, String ciudad, String email, int telefono, String usuario, String contraseña) {
         super(usuario, contraseña);
+        super.tipo = "P";
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -131,6 +130,19 @@ public class Paciente extends Usuario{
         {
         System.out.println("Error al escribir el archivo pacientes");
         }
+        
+        try
+        {File archivo=new File("usuarios.txt");
+        FileWriter escribir=new FileWriter(archivo,true);
+        escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
+        
+        escribir.close();
+        }catch(Exception e)
+        {
+        System.out.println("Error al escribir el archivo usuarios");
+        }
     }
+    
+    
     
 }
