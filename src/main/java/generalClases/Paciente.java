@@ -7,6 +7,8 @@ package generalClases;
 
 import extraClases.Locales;
 import extraClases.Prueba;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ import java.util.Date;
  *
  * @author josem
  */
-public class Paciente {
+public class Paciente extends Usuario{
     public int cedula;
     public String nombres;
     public String apellidos;
@@ -23,10 +25,12 @@ public class Paciente {
     public String ciudad;
     public String email;
     public int telefono;
+    public static String tipo = "P";
     //usuario
     //contraseña
 
-    public Paciente(int cedula, String nombres, String apellidos, Date fnacimiento, String genero, String ciudad, String email, int telefono) {
+    public Paciente(int cedula, String nombres, String apellidos, Date fnacimiento, String genero, String ciudad, String email, int telefono, String usuario, String contraseña) {
+        super(usuario, contraseña);
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -35,8 +39,7 @@ public class Paciente {
         this.ciudad = ciudad;
         this.email = email;
         this.telefono = telefono;
-        //super de usuario
-        //super de contraseña
+        
     }
 
     public int getCedula() {
@@ -117,5 +120,17 @@ public class Paciente {
         return pruebas;
     }
     
+    public void escribirArchivo (){
+        try
+        {File archivo=new File("pacientes.txt");
+        FileWriter escribir=new FileWriter(archivo,true);
+        escribir.write(this.usuario+","+this.cedula+","+this.nombres+","+this.apellidos+","+this.fnacimiento+","+this.genero+","+this.ciudad+","+this.email+","+this.telefono+"\n");
+        
+        escribir.close();
+        }catch(Exception e)
+        {
+        System.out.println("Error al escribir el archivo pacientes");
+        }
+    }
     
 }
