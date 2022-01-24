@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -26,13 +27,22 @@ public class OpcionesLController implements Initializable {
     private Button generaButton;
     @FXML
     private Button consultarButton;
+    @FXML
+    private Text mensage;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // cambio de colores a los botones
+        bienvenido.setFill(Color.WHITE);
+        
+        generaButton.setStyle("-fx-background-color: Blue");
+        generaButton.setTextFill(Color.WHITE);
+        
+        consultarButton.setStyle("-fx-background-color: Blue");
+        consultarButton.setTextFill(Color.WHITE);
     }    
 
     @FXML

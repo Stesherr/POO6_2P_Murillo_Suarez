@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -32,7 +33,14 @@ public class OpcionesPController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // cambio de colores a los botones
+        bienvenida.setFill(Color.WHITE);
+        
+        conocerButton.setStyle("-fx-background-color: Blue");
+        conocerButton.setTextFill(Color.WHITE);
+        
+        solicitarButton.setStyle("-fx-background-color: Blue");
+        solicitarButton.setTextFill(Color.WHITE);
     }    
 
     @FXML

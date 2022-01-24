@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -40,6 +41,10 @@ public class PaginaIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        cuentaCR.setFill(Color.BLUE);
+        
+        inicio.setStyle("-fx-background-color: Blue");
+        inicio.setTextFill(Color.WHITE);
     }    
 
     @FXML
