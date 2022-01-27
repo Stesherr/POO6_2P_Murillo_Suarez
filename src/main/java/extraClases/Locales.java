@@ -75,7 +75,7 @@ public class Locales {
     
     public static ArrayList<Locales> leerArchivo(){//horario guarda como vacio
         ArrayList<Locales> lista = new ArrayList<Locales>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/imagenes/sucursales.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/sucursales.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split("-");

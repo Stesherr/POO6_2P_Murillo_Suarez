@@ -67,7 +67,7 @@ public class Prueba {
     public static ArrayList<Prueba> leerArchivo(){
         ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
         
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pruebas.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pruebas.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");

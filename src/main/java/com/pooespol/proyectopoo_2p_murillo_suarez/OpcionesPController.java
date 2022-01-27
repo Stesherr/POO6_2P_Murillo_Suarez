@@ -39,6 +39,7 @@ public class OpcionesPController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // cambio de colores a los botones
         bienvenida.setFill(Color.WHITE);
+        //bienvenida.setText(string);
         
         conocerButton.setStyle("-fx-background-color: Blue");
         conocerButton.setTextFill(Color.WHITE);
@@ -55,7 +56,8 @@ public class OpcionesPController implements Initializable {
         
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Ubicaciones");
-       
+        stage.setMaxHeight(612);
+        stage.setMaxWidth(480);
         stage.show();
     }
 

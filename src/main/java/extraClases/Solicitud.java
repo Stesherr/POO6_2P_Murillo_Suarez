@@ -125,7 +125,7 @@ public class Solicitud {
     public void escribirArchivo(){
         try
         {
-        FileWriter escribir=new FileWriter("src/main/resources/docs/contratatacionesPruebas.txt/",true);
+        FileWriter escribir=new FileWriter("src/main/resources/docs/contratatacionesPruebas.txt",true);
         escribir.write(this.idSolicitud+","+this.usuarioPaciente+","+this.direccion+","+this.fecha+","+this.hora+","+this.ubicacionX+","+this.ubicacionY+","+this.totalPagar+"\n");
         
         escribir.close();
@@ -140,7 +140,7 @@ public class Solicitud {
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
         ArrayList<Paciente> pacientes = Paciente.leerPacientes();
         
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/contratatacionesPruebas.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/contratatacionesPruebas.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
@@ -167,7 +167,7 @@ public class Solicitud {
     public void detallarArchivo(Prueba p){
         try
         {
-        FileWriter escribir=new FileWriter("src/main/resources/docs/detallesSolicitudes.txt/",true);
+        FileWriter escribir=new FileWriter("src/main/resources/docs/detallesSolicitudes.txt",true);
         escribir.write(this.idSolicitud+","+p.codigoPrueba+"\n");
         
         escribir.close();

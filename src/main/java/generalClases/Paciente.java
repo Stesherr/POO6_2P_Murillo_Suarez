@@ -125,7 +125,7 @@ public class Paciente extends Usuario{
     
     public static ArrayList<Paciente> leerPacientes(){
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pacientes.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pacientes.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
@@ -152,23 +152,10 @@ public class Paciente extends Usuario{
     
     
     public void escribirArchivo (){
-        ArrayList<Paciente> pacientes = Paciente.leerPacientes();
-        int h = 0;
-        while(h<pacientes.size()){
-            if((pacientes.get(h).equals(this))||(pacientes.get(h).getCedula()==this.getCedula())){
-                System.out.println("este usuario ya se encuentra registrado");
-                break;
-            }else if(this.usuario==pacientes.get(h).usuario){
-                System.out.println("este nombre de usuario ya esta en uso");
-                break;
-            }else{
-                h++;
-            }
-        }
-        if(h==pacientes.size()){
+        if(Paciente.leerPacientes()==null){
             try
                 {
-                FileWriter escribir=new FileWriter("src/main/resources/docs/pacientes.txt/",true);
+                FileWriter escribir=new FileWriter("src/main/resources/docs/pacientes.txt",true);
                 escribir.write(this.usuario+","+this.cedula+","+this.nombres+","+this.apellidos+","+this.fnacimiento+","+this.genero+","+this.ciudad+","+this.email+","+this.telefono+"\n");
         
                 escribir.close();
@@ -177,10 +164,36 @@ public class Paciente extends Usuario{
                 System.out.println("Error al escribir el archivo pacientes");
             }
             super.escribirArchivo();
+        }else{
+            ArrayList<Paciente> pacientes = Paciente.leerPacientes();
+            int h = 0;
+            while(h<pacientes.size()){
+                if((pacientes.get(h).equals(this))||(pacientes.get(h).getCedula()==this.getCedula())){
+                    System.out.println("este usuario ya se encuentra registrado");
+                    break;
+                }else if(this.usuario==pacientes.get(h).usuario){
+                    System.out.println("este nombre de usuario ya esta en uso");
+                    break;
+                }else{
+                    h++;
+                }
+            }
+            if(h==pacientes.size()){
+                try
+                    {
+                    FileWriter escribir=new FileWriter("src/main/resources/docs/pacientes.txt",true);
+                    escribir.write(this.usuario+","+this.cedula+","+this.nombres+","+this.apellidos+","+this.fnacimiento+","+this.genero+","+this.ciudad+","+this.email+","+this.telefono+"\n");
+
+                    escribir.close();
+                }catch(Exception e)
+                {
+                    System.out.println("Error al escribir el archivo pacientes");
+                }
+                super.escribirArchivo();
+            }
+        
+        
         }
-        
-        
-        
         
     }
     
