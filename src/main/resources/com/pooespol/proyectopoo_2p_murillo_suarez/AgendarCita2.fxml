@@ -40,7 +40,11 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
+<<<<<<< HEAD
             <ImageView fx:id="mapa" fitHeight="150.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true" />
+=======
+            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+>>>>>>> b834a54f4eb8156d828de72fa0d56d7602bf81e4
          </children>
       </HBox>
       <HBox prefHeight="150.0" prefWidth="200.0">
@@ -59,7 +63,7 @@
                   <Label text="Dirección:" />
                   <Label text="Fecha:" GridPane.rowIndex="1" />
                   <Label text="Hora:" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1">
+                  <TextField fx:id="direccion" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -89,7 +93,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Finalizar" />
+            <Button fx:id="botonFinalizar" mnemonicParsing="false" text="Finalizar" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />

@@ -17,11 +17,10 @@ import java.util.ArrayList;
  * @author josem
  */
 public class Usuario {
+
     protected String usuario;
     protected String tipo;
     protected String contraseña;
-    
-    
 
     public Usuario(String usuario, String contraseña, String tipo) {
         this.usuario = usuario;
@@ -53,12 +52,11 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    
-    
     @Override
     public String toString() {
-        return  usuario ;
+        return usuario;
     }
+
     
     
     
@@ -68,10 +66,11 @@ public class Usuario {
         ArrayList<Usuario> usuarios = new ArrayList();
         try ( BufferedReader bf = new BufferedReader(new FileReader( "src/main/resources/docs/usuarios.txt"))) {
 
+
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
-                Usuario u= new Usuario(line[0], line[1], line[2]);
+                Usuario u = new Usuario(line[0], line[1], line[2]);
                 usuarios.add(u);
             }
 
@@ -83,44 +82,40 @@ public class Usuario {
         }
         return usuarios;
     }
-    
-    public void escribirArchivo(){
-        
+
+    public void escribirArchivo() {
+
         ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
         int h = 0;
-        while(h<usuarios.size()){
-            if(usuarios.get(h).equals(this)){
+        while (h < usuarios.size()) {
+            if (usuarios.get(h).equals(this)) {
                 System.out.println("este usuario ya se encuentra registrado");
                 break;
-            }else if(this.getUsuario().equals(usuarios.get(h).getUsuario())){
+            } else if (this.getUsuario().equals(usuarios.get(h).getUsuario())) {
                 System.out.println("este nombre de usuario ya esta en uso");
                 break;
-            }else{
+            } else {
                 h++;
             }
         }
+
         if(h==usuarios.size()){
 
             try (FileWriter escribir = new FileWriter("src/main/resources/docs/usuarios.txt",true)) {
                  escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
                
-            }catch(IOException e)
-
-            {
-            System.out.println("Error al escribir el archivo usuarios");
-            } 
+            }catch(IOException e){
+        System.out.println("Error al escribir el archivo usuarios");
         }
-            
-        
-        
     }
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         // TODO code application logic here
-        
     }
-    
+
 }
