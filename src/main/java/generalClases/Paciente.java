@@ -7,8 +7,12 @@ package generalClases;
 
 import extraClases.Locales;
 import extraClases.Prueba;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,16 +24,16 @@ public class Paciente extends Usuario{
     public int cedula;
     public String nombres;
     public String apellidos;
-    public Date fnacimiento;
+    public String fnacimiento;
     public String genero;
     public String ciudad;
     public String email;
     public int telefono;
     
 
-    public Paciente(int cedula, String nombres, String apellidos, Date fnacimiento, String genero, String ciudad, String email, int telefono, String usuario, String contraseña) {
-        super(usuario, contraseña);
-        super.tipo = "P";
+    public Paciente(int cedula, String nombres, String apellidos, String fnacimiento, String genero, String ciudad, String email, int telefono, String usuario, String contraseña) {
+        super(usuario, contraseña,"P");
+        
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -65,11 +69,11 @@ public class Paciente extends Usuario{
         this.apellidos = apellidos;
     }
 
-    public Date getFnacimiento() {
+    public String getFnacimiento() {
         return fnacimiento;
     }
 
-    public void setFnacimiento(Date fnacimiento) {
+    public void setFnacimiento(String fnacimiento) {
         this.fnacimiento = fnacimiento;
     }
 
@@ -119,28 +123,65 @@ public class Paciente extends Usuario{
         return pruebas;
     }
     
+    public static ArrayList<Paciente> leerPacientes(){
+        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pacientes.txt/"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String[] line = linea.split(",");
+                pacientes.add(new Paciente(Integer.parseInt(line[1]),line[2],line[3],line[4],line[5],line[6],line[7],Integer.parseInt(line[8]),line[0],""));
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
+        for (int i = 0; i < pacientes.size(); i++) {
+            int j = 0;
+            while(!pacientes.get(i).getUsuario().equals(usuarios.get(j).getUsuario())){
+                j++;
+            }
+            pacientes.get(i).setContraseña(usuarios.get(j).getContraseña());
+            
+        }
+        return pacientes;
+    }
+    
+    
     public void escribirArchivo (){
-        try
-        {File archivo=new File("pacientes.txt");
-        FileWriter escribir=new FileWriter(archivo,true);
-        escribir.write(this.usuario+","+this.cedula+","+this.nombres+","+this.apellidos+","+this.fnacimiento+","+this.genero+","+this.ciudad+","+this.email+","+this.telefono+"\n");
+        ArrayList<Paciente> pacientes = Paciente.leerPacientes();
+        int h = 0;
+        while(h<pacientes.size()){
+            if((pacientes.get(h).equals(this))||(pacientes.get(h).getCedula()==this.getCedula())){
+                System.out.println("este usuario ya se encuentra registrado");
+                break;
+            }else if(this.usuario==pacientes.get(h).usuario){
+                System.out.println("este nombre de usuario ya esta en uso");
+                break;
+            }else{
+                h++;
+            }
+        }
+        if(h==pacientes.size()){
+            try
+                {
+                FileWriter escribir=new FileWriter("src/main/resources/docs/pacientes.txt/",true);
+                escribir.write(this.usuario+","+this.cedula+","+this.nombres+","+this.apellidos+","+this.fnacimiento+","+this.genero+","+this.ciudad+","+this.email+","+this.telefono+"\n");
         
-        escribir.close();
-        }catch(Exception e)
-        {
-        System.out.println("Error al escribir el archivo pacientes");
+                escribir.close();
+            }catch(Exception e)
+            {
+                System.out.println("Error al escribir el archivo pacientes");
+            }
+            super.escribirArchivo();
         }
         
-        try
-        {File archivo=new File("usuarios.txt");
-        FileWriter escribir=new FileWriter(archivo,true);
-        escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
         
-        escribir.close();
-        }catch(Exception e)
-        {
-        System.out.println("Error al escribir el archivo usuarios");
-        }
+        
+        
     }
     
     

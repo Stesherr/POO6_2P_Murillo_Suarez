@@ -5,7 +5,11 @@
  */
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
+import generalClases.Paciente;
+import generalClases.Usuario;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +19,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,6 +28,9 @@ import javafx.scene.paint.Color;
  */
 public class RegistroController implements Initializable {
 
+    
+    private String gener ="";
+    
     @FXML
     private Button registro;
     @FXML
@@ -49,6 +57,7 @@ public class RegistroController implements Initializable {
     private RadioButton masButton;
     @FXML
     private RadioButton otroButton;
+    
 
     /**
      * Initializes the controller class.
@@ -56,24 +65,41 @@ public class RegistroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        
         registro.setStyle("-fx-background-color: Blue");
         registro.setTextFill(Color.WHITE);
     }    
 
     @FXML
+    
     private void registrar(ActionEvent event) {
+        String date = fNac.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        Paciente pa = new Paciente(Integer.parseInt(ced.getText()), nom.getText(), ape.getText(), date, gener, ciud.getText(), mail.getText(), Integer.parseInt(fono.getText()), usuar.getText(), contra.getText());
+        pa.escribirArchivo();
+                
+        
     }
 
     @FXML
     private void femTocado(ActionEvent event) {
+        masButton.setSelected(false);
+        otroButton.setSelected(false);
+        gener = "Femenino";
     }
 
     @FXML
     private void masTocado(ActionEvent event) {
+        femButton.setSelected(false);
+        otroButton.setSelected(false);
+        gener = "Masculino";
     }
 
     @FXML
     private void otroTocado(ActionEvent event) {
+        masButton.setSelected(false);
+        femButton.setSelected(false);
+        gener = "Otro";
     }
     
 }
