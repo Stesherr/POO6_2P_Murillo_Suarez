@@ -19,7 +19,7 @@
    <children>
       <Text fx:id="bienvenido" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido" translateX="50.0">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Text>
       <Button fx:id="generaButton" mnemonicParsing="false" onAction="#generarConsolidado" text="Generar consolidado de citas" translateY="-40.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />

@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -24,9 +25,10 @@ public class Locales {
     public Double coordenadaY;
 
     public Locales(String nombre, String direccion, String horario, Double coordenadaX, Double coordenadaY) {
+        Random rand = new Random();
         this.nombre = nombre;
         this.direccion = direccion;
-        this.horario = horario;
+        this.horario = "10:00-"+rand.nextInt(11)+":00";
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
     }

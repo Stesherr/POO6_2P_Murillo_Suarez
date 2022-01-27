@@ -64,13 +64,10 @@ public class Usuario {
     
     
     public static ArrayList<Usuario> leerUsuarios(){
-<<<<<<< HEAD
-        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt"))) {
-=======
+
         ArrayList<Usuario> usuarios = new ArrayList();
         try ( BufferedReader bf = new BufferedReader(new FileReader( "src/main/resources/docs/usuarios.txt"))) {
->>>>>>> 2b5301ae18608bf30cc4c6842315ba4e554b089b
+
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
@@ -103,21 +100,12 @@ public class Usuario {
             }
         }
         if(h==usuarios.size()){
-<<<<<<< HEAD
-           try
-            {
-            FileWriter escribir=new FileWriter("src/main/resources/docs/usuarios.txt",true);
-            escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
-        
-            escribir.close();
-            }catch(Exception e)
-=======
-           
+
             try (FileWriter escribir = new FileWriter("src/main/resources/docs/usuarios.txt",true)) {
                  escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
                
             }catch(IOException e)
->>>>>>> 2b5301ae18608bf30cc4c6842315ba4e554b089b
+
             {
             System.out.println("Error al escribir el archivo usuarios");
             } 

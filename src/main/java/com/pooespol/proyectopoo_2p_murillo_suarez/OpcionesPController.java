@@ -5,6 +5,8 @@
  */
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
+import static com.pooespol.proyectopoo_2p_murillo_suarez.PaginaIController.cliente;
+import generalClases.Paciente;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +27,9 @@ import javafx.stage.Stage;
  */
 public class OpcionesPController implements Initializable {
 
+    public static Paciente pac = Paciente.obtenerPaciente(cliente);
+    public static Stage stage = new Stage();
+    
     @FXML
     private Text bienvenida;
     @FXML
@@ -39,7 +44,7 @@ public class OpcionesPController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // cambio de colores a los botones
         bienvenida.setFill(Color.WHITE);
-        //bienvenida.setText(string);
+        bienvenida.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
         conocerButton.setStyle("-fx-background-color: Blue");
         conocerButton.setTextFill(Color.WHITE);
@@ -56,14 +61,16 @@ public class OpcionesPController implements Initializable {
         
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Ubicaciones");
-        stage.setMaxHeight(612);
-        stage.setMaxWidth(480);
+        stage.setMaxHeight(580);
+        stage.setMaxWidth(830);
+        stage.setMinHeight(580);
+        stage.setMinWidth(830);
         stage.show();
     }
 
     @FXML
     private void solicitarPruebas(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
+        
         
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "agendarCita.fxml"));
         

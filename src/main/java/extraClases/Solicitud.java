@@ -33,7 +33,7 @@ import java.util.Random;
  */
 public class Solicitud {
     public int idSolicitud;
-    public Usuario usuarioPaciente;
+    public Paciente usuarioPaciente;
     public String direccion;
     public String fecha;
     public String hora;
@@ -43,8 +43,9 @@ public class Solicitud {
     public int codigo;
     //lista de pruebas
 
-    public Solicitud(int idSolicitud, Usuario usuarioPaciente, String direccion, String fecha, String hora, Double ubicacionX, Double ubicacionY, Double totalPagar) {
-        this.idSolicitud = idSolicitud;//creo se genera no se pide
+    public Solicitud( Paciente usuarioPaciente, String direccion, String fecha, String hora, Double ubicacionX, Double ubicacionY, Double totalPagar) {
+        Random rand = new Random();
+        this.idSolicitud = rand.nextInt(1000000);//creo se genera no se pide
         this.usuarioPaciente = usuarioPaciente;
         this.direccion = direccion;
         this.fecha = fecha;
@@ -52,9 +53,22 @@ public class Solicitud {
         this.ubicacionX = ubicacionX;
         this.ubicacionY = ubicacionY;
         this.totalPagar = totalPagar;
-        Random rand = new Random();
         this.codigo = rand.nextInt(10000);
     }
+
+    public Solicitud(int idSolicitud, Paciente usuarioPaciente, String direccion, String fecha, String hora, Double ubicacionX, Double ubicacionY, Double totalPagar) {
+        this.idSolicitud = idSolicitud;
+        this.usuarioPaciente = usuarioPaciente;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.ubicacionX = ubicacionX;
+        this.ubicacionY = ubicacionY;
+        this.totalPagar = totalPagar;
+        this.codigo = codigoSol(idSolicitud);
+    }
+    
+    
 
     public int getIdSolicitud() {
         return idSolicitud;
@@ -64,11 +78,11 @@ public class Solicitud {
         this.idSolicitud = idSolicitud;
     }
 
-    public Usuario getUsuarioPaciente() {
+    public Paciente getUsuarioPaciente() {
         return usuarioPaciente;
     }
 
-    public void setUsuarioPaciente(Usuario usuarioPaciente) {
+    public void setUsuarioPaciente(Paciente usuarioPaciente) {
         this.usuarioPaciente = usuarioPaciente;
     }
 
@@ -119,14 +133,17 @@ public class Solicitud {
     public void setTotalPagar(Double totalPagar) {
         this.totalPagar = totalPagar;
     }
-    
+
+    public int getCodigo() {
+        return codigo;
+    }
     
     
     public void escribirArchivo(){
         try
         {
         FileWriter escribir=new FileWriter("src/main/resources/docs/contratatacionesPruebas.txt",true);
-        escribir.write(this.idSolicitud+","+this.usuarioPaciente+","+this.direccion+","+this.fecha+","+this.hora+","+this.ubicacionX+","+this.ubicacionY+","+this.totalPagar+"\n");
+        escribir.write(this.idSolicitud+","+this.usuarioPaciente.getUsuario()+","+this.direccion+","+this.fecha+","+this.hora+","+this.ubicacionX+","+this.ubicacionY+","+this.totalPagar+"\n");
         
         escribir.close();
         }catch(Exception e)
@@ -162,6 +179,26 @@ public class Solicitud {
         }
         
         return solicitudes;
+    }
+    
+    public static int codigoSol(int id){
+        int codSol=0;
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/detallesSolicitudes.txt"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String[] line = linea.split(",");
+                if(id==Integer.parseInt(line[0])){
+                    codSol = Integer.parseInt(line[1]);
+                    break;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return codSol;
     }
     
     public void detallarArchivo(Prueba p){

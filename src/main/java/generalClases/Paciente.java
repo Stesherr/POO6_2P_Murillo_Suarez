@@ -119,7 +119,7 @@ public class Paciente extends Usuario{
     
     public ArrayList<Prueba> solicitarPruebas(){
         ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
-        //leer pruebas y agregar a pruebas
+        //leer pruebas y agregar a pruebas arraylist de arraylist de 2 elementos(cant, nomPrueba)
         return pruebas;
     }
     
@@ -197,6 +197,17 @@ public class Paciente extends Usuario{
         
     }
     
+    public static Paciente obtenerPaciente(Usuario p){
+        ArrayList<Paciente> pacientes = leerPacientes();
+        for (int i = 0; i < pacientes.size(); i++) {
+            if(p.getUsuario().equals(pacientes.get(i).getUsuario()) && p.getContraseña().equals(pacientes.get(i).getContraseña())){
+                return pacientes.get(i);
+        }
+
+            
+          
+    }
+        return null;
     
-    
+    }
 }

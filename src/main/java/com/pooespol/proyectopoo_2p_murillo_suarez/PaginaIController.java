@@ -40,8 +40,10 @@ import javafx.stage.StageStyle;
  *
  * @author josem
  */
-public class PaginaIController implements Initializable {
-
+public  class PaginaIController implements Initializable {
+    
+    public static Usuario cliente;
+    
     @FXML
     private TextField user;
     @FXML
@@ -83,6 +85,7 @@ public class PaginaIController implements Initializable {
                 System.out.println("hay cuadros de texto sin rellenar");
             }else if (user.getText().equals(usuario.getUsuario()) ){
                     if(contra.getText().equals(usuario.getContraseña())){
+                        cliente = usuario;
                         if(usuario.getTipo().equalsIgnoreCase("L")){
                             try {
                                 App.setRoot("opcionesL");
@@ -92,6 +95,7 @@ public class PaginaIController implements Initializable {
                             
                         }else{
                             try {
+                                
                                 App.setRoot("opcionesP");
                             } catch (IOException ex) {
                             }

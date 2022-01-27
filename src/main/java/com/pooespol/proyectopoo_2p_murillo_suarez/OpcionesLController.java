@@ -41,6 +41,7 @@ public class OpcionesLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // cambio de colores a los botones
         bienvenido.setFill(Color.WHITE);
+        bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
         generaButton.setStyle("-fx-background-color: Blue");
         generaButton.setTextFill(Color.WHITE);
