@@ -27,7 +27,7 @@ import javafx.scene.layout.Pane;
  */
 public class UbicacionesController implements Initializable {
 
-    private ImageView mapa;
+    
     @FXML
     private Pane root;
 
@@ -37,12 +37,15 @@ public class UbicacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/mapa.jpg/")){
-            Image i=new Image(input);
+        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/mapa.jpg")){
+            Image i=new Image(input,612, 480, true, true);
+            
             BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            
             Background pica = new Background(pic);
             root.setBackground(pica);
-            mapa.setImage(i);
+            
+            
         }catch(IOException f){
             System.out.println("No se encontro la imagen");
         }

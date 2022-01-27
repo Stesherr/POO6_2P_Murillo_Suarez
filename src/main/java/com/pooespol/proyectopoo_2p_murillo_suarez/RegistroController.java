@@ -74,9 +74,14 @@ public class RegistroController implements Initializable {
     @FXML
     
     private void registrar(ActionEvent event) {
-        String date = fNac.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Paciente pa = new Paciente(Integer.parseInt(ced.getText()), nom.getText(), ape.getText(), date, gener, ciud.getText(), mail.getText(), Integer.parseInt(fono.getText()), usuar.getText(), contra.getText());
-        pa.escribirArchivo();
+        
+        try{
+            String date = fNac.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            Paciente pa = new Paciente(Integer.parseInt(ced.getText()), nom.getText(), ape.getText(), date, gener, ciud.getText(), mail.getText(), Integer.parseInt(fono.getText()), usuar.getText(), contra.getText());
+            pa.escribirArchivo();
+        }catch(NullPointerException e){
+            System.out.println("algunos espacios no han sido llenados");//lanzar unaa ventana emergente de 5 segundos
+        }
                 
         
     }

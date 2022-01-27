@@ -73,45 +73,40 @@ public class PaginaIController implements Initializable {
     }    
 
     @FXML
-    private void iniciarSesion(ActionEvent event) throws IOException {
+    private void iniciarSesion(ActionEvent event)  {
         ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
-        ArrayList<Usuario> posiblesUsers = new ArrayList<Usuario>();
-        int i = 0;
-        while(i<usuarios.size()){
-            if (user.getText()!=null && contra.getText()!=null){
-                
-                if (user.getText() == usuarios.get(i).getUsuario()){
-                posiblesUsers.add(usuarios.get(i));
-                i++;
-            }
-            }
-            
-        }
-        if(posiblesUsers.size()==0){
-            System.out.println("este usuario no se encuentra registrado en el sistema");
-        }else{
-            int existe = 0;
-            for (int j = 0; j < posiblesUsers.size(); j++) {
-                if(contra.getText().equals(posiblesUsers.get(i).getContraseña())){
-                    if(posiblesUsers.get(i).getTipo()=="L"){
-                        App.setRoot("OpcionesL");
-                        existe=1;
-                        break;
+        ArrayList<Usuario> posiblesUsers = new ArrayList<>();
+        
+         
+        for(Usuario usuario : usuarios){    
+            if(user.getText().equalsIgnoreCase("")||contra.getText().equalsIgnoreCase("")){
+                System.out.println("hay cuadros de texto sin rellenar");
+            }else if (user.getText().equals(usuario.getUsuario()) ){
+                    if(contra.getText().equals(usuario.getContraseña())){
+                        if(usuario.getTipo().equalsIgnoreCase("L")){
+                            try {
+                                App.setRoot("opcionesL");
+                            } catch (IOException ex) {
+                            }
+                            break;
+                            
+                        }else{
+                            try {
+                                App.setRoot("opcionesP");
+                            } catch (IOException ex) {
+                            }
+                            break;
+                        }
                     }else{
-                        App.setRoot("OpcionesP");
-                        existe=1;
-                        break;
+                        System.out.println("contraseña incorrecta");
                     }
+                }else{
+                   System.out.println("este usuario no se encuentra registrado en el sistema"); 
                 }
-            }
-            if(existe==0){
-                System.out.println("contraseña incorrecta");
-            }
         }
+
+                
         
-        
-        
-       
         
     }
 

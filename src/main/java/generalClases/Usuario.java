@@ -5,9 +5,7 @@
  */
 package generalClases;
 
-import extraClases.Solicitud;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -66,12 +64,13 @@ public class Usuario {
     
     
     public static ArrayList<Usuario> leerUsuarios(){
-        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt/"))) {
+        ArrayList<Usuario> usuarios = new ArrayList();
+        try ( BufferedReader bf = new BufferedReader(new FileReader( "src/main/resources/docs/usuarios.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
-                usuarios.add(new Usuario(line[0],line[1],line[2]));
+                Usuario u= new Usuario(line[0], line[1], line[2]);
+                usuarios.add(u);
             }
 
         } catch (FileNotFoundException ex) {
@@ -91,7 +90,7 @@ public class Usuario {
             if(usuarios.get(h).equals(this)){
                 System.out.println("este usuario ya se encuentra registrado");
                 break;
-            }else if(this.usuario==usuarios.get(h).usuario){
+            }else if(this.getUsuario().equals(usuarios.get(h).getUsuario())){
                 System.out.println("este nombre de usuario ya esta en uso");
                 break;
             }else{
@@ -99,13 +98,11 @@ public class Usuario {
             }
         }
         if(h==usuarios.size()){
-           try
-            {
-            FileWriter escribir=new FileWriter("src/main/resources/docs/usuarios.txt/",true);
-            escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
-        
-            escribir.close();
-            }catch(Exception e)
+           
+            try (FileWriter escribir = new FileWriter("src/main/resources/docs/usuarios.txt",true)) {
+                 escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
+               
+            }catch(IOException e)
             {
             System.out.println("Error al escribir el archivo usuarios");
             } 
