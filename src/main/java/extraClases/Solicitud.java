@@ -199,7 +199,7 @@ public class Solicitud {
             message.setSubject("Información de su solicitud");
             message.setText("FECHA: "+this.fecha+"\n" +
                             "HORA; "+this.hora+"\n" +
-                            "PRUEBAS SOLICITADAS; "+"\n" +
+                           "PRUEBAS SOLICITADAS; "+"\n" +
                             "CÓDIGO para consultar resultados posteriormente: "+this.codigo);
             Transport transport = session.getTransport("smtp");
             transport.connect("smtp.gmail.com", remitente, clave);
