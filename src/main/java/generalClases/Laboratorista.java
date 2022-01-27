@@ -18,9 +18,13 @@ public class Laboratorista extends Usuario{
     
 
     public Laboratorista(String usuario, String contraseña) {
-        super(usuario, contraseña);
-        super.tipo = "L";
-                
+        super(usuario, contraseña,"L");
+        
+    }
+
+    @Override
+    public void escribirArchivo() {
+        super.escribirArchivo(); //To change body of generated methods, choose Tools | Templates.
     }
     
     

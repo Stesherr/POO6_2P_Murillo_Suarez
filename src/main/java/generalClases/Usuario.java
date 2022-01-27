@@ -7,8 +7,10 @@ package generalClases;
 
 import extraClases.Solicitud;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,23 +23,51 @@ public class Usuario {
     protected String tipo;
     protected String contraseña;
     
-    public Usuario(String usuario, String contraseña){
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-       
-    }
+    
 
     public Usuario(String usuario, String contraseña, String tipo) {
         this.usuario = usuario;
         this.tipo = tipo;
         this.contraseña = contraseña;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return  usuario ;
+    }
     
     
     
-    public static ArrayList<Usuario> leerArchivo(){
+    
+    public static ArrayList<Usuario> leerUsuarios(){
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/imagenes/usuarios.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt/"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
@@ -52,10 +82,43 @@ public class Usuario {
         }
         return usuarios;
     }
+    
+    public void escribirArchivo(){
+        
+        ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
+        int h = 0;
+        while(h<usuarios.size()){
+            if(usuarios.get(h).equals(this)){
+                System.out.println("este usuario ya se encuentra registrado");
+                break;
+            }else if(this.usuario==usuarios.get(h).usuario){
+                System.out.println("este nombre de usuario ya esta en uso");
+                break;
+            }else{
+                h++;
+            }
+        }
+        if(h==usuarios.size()){
+           try
+            {
+            FileWriter escribir=new FileWriter("src/main/resources/docs/usuarios.txt/",true);
+            escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
+        
+            escribir.close();
+            }catch(Exception e)
+            {
+            System.out.println("Error al escribir el archivo usuarios");
+            } 
+        }
+            
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         // TODO code application logic here
         
     }

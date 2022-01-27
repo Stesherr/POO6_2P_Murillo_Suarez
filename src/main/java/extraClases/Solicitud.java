@@ -7,9 +7,14 @@ package extraClases;
 
 import generalClases.Paciente;
 import generalClases.Usuario;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.net.PasswordAuthentication;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -30,7 +35,7 @@ public class Solicitud {
     public int idSolicitud;
     public Usuario usuarioPaciente;
     public String direccion;
-    public Date fecha;
+    public String fecha;
     public String hora;
     public Double ubicacionX;
     public Double ubicacionY;
@@ -38,7 +43,7 @@ public class Solicitud {
     public int codigo;
     //lista de pruebas
 
-    public Solicitud(int idSolicitud, Usuario usuarioPaciente, String direccion, Date fecha, String hora, Double ubicacionX, Double ubicacionY, Double totalPagar) {
+    public Solicitud(int idSolicitud, Usuario usuarioPaciente, String direccion, String fecha, String hora, Double ubicacionX, Double ubicacionY, Double totalPagar) {
         this.idSolicitud = idSolicitud;//creo se genera no se pide
         this.usuarioPaciente = usuarioPaciente;
         this.direccion = direccion;
@@ -75,11 +80,11 @@ public class Solicitud {
         this.direccion = direccion;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -119,8 +124,8 @@ public class Solicitud {
     
     public void escribirArchivo(){
         try
-        {File archivo=new File("contratatacionesPruebas.txt");
-        FileWriter escribir=new FileWriter(archivo,true);
+        {
+        FileWriter escribir=new FileWriter("src/main/resources/docs/contratatacionesPruebas.txt/",true);
         escribir.write(this.idSolicitud+","+this.usuarioPaciente+","+this.direccion+","+this.fecha+","+this.hora+","+this.ubicacionX+","+this.ubicacionY+","+this.totalPagar+"\n");
         
         escribir.close();
@@ -131,10 +136,38 @@ public class Solicitud {
     
     }
     
+    public ArrayList<Solicitud> leerSolicitudes(){
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+        ArrayList<Paciente> pacientes = Paciente.leerPacientes();
+        
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/contratatacionesPruebas.txt/"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String[] line = linea.split(",");
+                
+                for (int i = 0; i < pacientes.size(); i++) {
+                    if(line[1].equals(pacientes.get(i).getUsuario())){
+                        solicitudes.add(new Solicitud(Integer.parseInt(line[0]), pacientes.get(i), line[2], line[3], line[4], Double.parseDouble(line[5]), Double.parseDouble(line[6]), Double.parseDouble(line[7])));
+                        break;
+                    }
+                }
+                
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        
+        return solicitudes;
+    }
+    
     public void detallarArchivo(Prueba p){
         try
-        {File archivo=new File("detallesSolicitudes.txt");
-        FileWriter escribir=new FileWriter(archivo,true);
+        {
+        FileWriter escribir=new FileWriter("src/main/resources/docs/detallesSolicitudes.txt/",true);
         escribir.write(this.idSolicitud+","+p.codigoPrueba+"\n");
         
         escribir.close();

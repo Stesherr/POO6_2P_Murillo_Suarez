@@ -5,6 +5,10 @@
  */
 package extraClases;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -12,25 +16,25 @@ import java.util.ArrayList;
  * @author josem
  */
 public class Prueba {
-    public int codigoPrueba;
+    public String codigoPrueba;
     public String tipoPrueba;
     public String nombrePrueba;
     public Double precio;
 
     
     
-    public Prueba(int codigoPrueba, String tipoPrueba, String nombrePrueba, Double precio) {
+    public Prueba(String codigoPrueba, String tipoPrueba, String nombrePrueba, Double precio) {
         this.codigoPrueba = codigoPrueba;
         this.tipoPrueba = tipoPrueba;
         this.nombrePrueba = nombrePrueba;
         this.precio = precio;
     }
 
-    public int getCodigoPrueba() {
+    public String getCodigoPrueba() {
         return codigoPrueba;
     }
 
-    public void setCodigoPrueba(int codigoPrueba) {
+    public void setCodigoPrueba(String codigoPrueba) {
         this.codigoPrueba = codigoPrueba;
     }
 
@@ -62,7 +66,21 @@ public class Prueba {
     
     public static ArrayList<Prueba> leerArchivo(){
         ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
-        //leer el archivo de pruebas
+        
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pruebas.txt/"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                String[] line = linea.split(",");
+                pruebas.add(new Prueba(line[0], line[1], line[2], Double.parseDouble(line[3])));
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        
         return pruebas;
     }
 }
