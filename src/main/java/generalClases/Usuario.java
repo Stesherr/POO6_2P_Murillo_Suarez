@@ -67,7 +67,7 @@ public class Usuario {
     
     public static ArrayList<Usuario> leerUsuarios(){
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt/"))) {
+        try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");
@@ -101,7 +101,7 @@ public class Usuario {
         if(h==usuarios.size()){
            try
             {
-            FileWriter escribir=new FileWriter("src/main/resources/docs/usuarios.txt/",true);
+            FileWriter escribir=new FileWriter("src/main/resources/docs/usuarios.txt",true);
             escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
         
             escribir.close();
