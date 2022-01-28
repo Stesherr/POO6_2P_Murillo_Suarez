@@ -48,6 +48,7 @@ import javafx.stage.Stage;
 public class UbicacionesController implements Initializable {
 
     
+    
     @FXML
     private Pane root;
 
@@ -81,14 +82,14 @@ public class UbicacionesController implements Initializable {
         
     }  
     
-    public void crearThreadNuevaVentana(Label l){
+    public void crearThreadContador(Label l){
            Thread t = new Thread(new Runnable(){
                @Override
                public void run() {
                    int i = 0;
-                   while(true) {
+                   while(i<5) {
                        
-                       String status = "Mostrando "+i + " segundos...";
+                       String status = "Mostrando "+(i+1) + " segundos...";
                        Platform.runLater(new Runnable() {
                            @Override
                            public void run() {
@@ -112,7 +113,40 @@ public class UbicacionesController implements Initializable {
    
     }
     
-    public void abrirVentanaAdicional(Locales local){
+    public void crearThreadCerrarVentana(Stage stag){
+           Thread t = new Thread(new Runnable(){
+               @Override
+               public void run() {
+                   int i = 0;
+                   while(i<6) {
+                       
+                       if(i==5){
+                          Platform.runLater(new Runnable() {
+                           @Override
+                           public void run() {
+                               stag.close();
+                           }
+                       });
+                       i++;
+                       try {
+                           Thread.sleep(1000);
+                       } catch (InterruptedException ex) {
+                           ex.printStackTrace();
+                       } 
+                       }
+                       
+                       
+                   }
+               }
+           });
+           
+           t.setDaemon(true);
+           t.start();
+           
+   
+    }
+    
+    public void abrirVentanaAdicional(Locales local) throws InterruptedException{
         Stage stage = new Stage();
         stage.setTitle("Detalles");
         
@@ -125,8 +159,8 @@ public class UbicacionesController implements Initializable {
         Label tiempoT = new Label();
         
         Button btncerrar = new Button("Cerrar");
-        btncerrar.setStyle("-fx-background-color: blue");
-        btncerrar.setStyle("-fx-text-fill: white");
+        btncerrar.setStyle("-fx-background-color: blue ; -fx-text-fill: white" );
+        
         
         VBox root = new VBox(nombre, direc, horario,  tiempoT, btncerrar);
         
@@ -147,7 +181,9 @@ public class UbicacionesController implements Initializable {
         stage.setMinWidth(250);
         
         stage.show();
-        crearThreadNuevaVentana(tiempoT);
+        crearThreadContador(tiempoT);
+        crearThreadCerrarVentana(stage);
+        
         
         
      
@@ -170,11 +206,15 @@ public class UbicacionesController implements Initializable {
          root.getChildren().addAll(imgView);
          
          
-         root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         imgView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 System.out.println("Abriendo nueva ventana...");
-                abrirVentanaAdicional(local);
+                try {
+                    abrirVentanaAdicional(local);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
              
          });
