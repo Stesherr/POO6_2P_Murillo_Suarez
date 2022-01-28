@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -73,9 +75,9 @@ public class Prueba {
     
     public static ArrayList<Prueba> leerArchivo(){
         ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
-        
+        File file = new File("src/main/resources/docs/pruebas.txt");
         try ( 
-            BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pruebas.txt"))) {
+            BufferedReader bf = new BufferedReader(new InputStreamReader(new FileInputStream(file),StandardCharsets.UTF_8))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] line = linea.split(",");

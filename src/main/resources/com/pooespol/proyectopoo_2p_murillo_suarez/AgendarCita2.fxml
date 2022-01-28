@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCita2Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCita2Controller">
    <children>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
          <children>
-            <Label text="Agende su cita" textFill="#1d5b9e">
+            <Label text="Agende su cita" textFill="#3066e3">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -40,11 +40,9 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-<<<<<<< HEAD
+
             <ImageView fx:id="mapa" fitHeight="150.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true" />
-=======
-            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
->>>>>>> b834a54f4eb8156d828de72fa0d56d7602bf81e4
+
          </children>
       </HBox>
       <HBox prefHeight="150.0" prefWidth="200.0">
@@ -93,7 +91,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="botonFinalizar" mnemonicParsing="false" text="Finalizar" />
+            <Button fx:id="botonFinalizar" mnemonicParsing="false" style="-fx-font-weight: Bold;" text="Finalizar" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />

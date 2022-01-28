@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -67,6 +68,12 @@ public class AgendarCitaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ArrayList tipos = Prueba.cargarTipoP();
         tipoPVBox.getItems().setAll(tipos);
+        
+        botonAgregar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
+        botonAgregar.setTextFill(Color.WHITE);
+        
+        botonContinuar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
+        botonContinuar.setTextFill(Color.WHITE);
     }    
 
     @FXML
