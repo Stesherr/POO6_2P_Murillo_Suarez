@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.PaginaIController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.PaginaIController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="0.0" prefWidth="96.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.0" minWidth="10.0" prefWidth="361.0" />

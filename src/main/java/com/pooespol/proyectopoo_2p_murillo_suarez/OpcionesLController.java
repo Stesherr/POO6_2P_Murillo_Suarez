@@ -5,6 +5,7 @@
  */
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,6 +41,8 @@ public class OpcionesLController implements Initializable {
     private Button consultarButton;
     @FXML
     private Text mensage;
+    @FXML
+    private GridPane root;
 
     /**
      * Initializes the controller class.
@@ -48,6 +58,19 @@ public class OpcionesLController implements Initializable {
         
         consultarButton.setStyle("-fx-background-color: Blue");
         consultarButton.setTextFill(Color.WHITE);
+        
+        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/fondo.jpg")){
+            Image i=new Image(input,2000, 2000, true, true);
+            
+            BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            
+            Background pica = new Background(pic);
+            root.setBackground(pica);
+            
+            
+        }catch(IOException f){
+            System.out.println("No se encontro la imagen");
+        }
     }    
 
     @FXML

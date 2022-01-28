@@ -66,7 +66,7 @@ public  class PaginaIController implements Initializable {
         inicio.setStyle("-fx-background-color: Blue");
         inicio.setTextFill(Color.WHITE);
         
-        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/logo.jpg/")){
+        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/logo.jpg")){
             Image i=new Image(input);
             logo.setImage(i);
         }catch(IOException f){
@@ -88,6 +88,7 @@ public  class PaginaIController implements Initializable {
                         cliente = usuario;
                         if(usuario.getTipo().equalsIgnoreCase("L")){
                             try {
+                                
                                 App.setRoot("opcionesL");
                             } catch (IOException ex) {
                             }
@@ -123,7 +124,7 @@ public  class PaginaIController implements Initializable {
         
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Crear Cuenta");
-       
+        
         stage.show();
         
     

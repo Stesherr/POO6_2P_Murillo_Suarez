@@ -7,6 +7,7 @@ package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 import static com.pooespol.proyectopoo_2p_murillo_suarez.PaginaIController.cliente;
 import generalClases.Paciente;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,6 +44,8 @@ public class OpcionesPController implements Initializable {
     private Button conocerButton;
     @FXML
     private Button solicitarButton;
+    @FXML
+    private GridPane root;
 
     /**
      * Initializes the controller class.
@@ -51,6 +61,20 @@ public class OpcionesPController implements Initializable {
         
         solicitarButton.setStyle("-fx-background-color: Blue");
         solicitarButton.setTextFill(Color.WHITE);
+        
+        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/fondo.jpg")){
+            Image i=new Image(input,2000, 2000, true, true);
+            
+            BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            
+            Background pica = new Background(pic);
+            root.setBackground(pica);
+            
+            
+            
+        }catch(IOException f){
+            System.out.println("No se encontro la imagen");
+        }
     }    
 
     @FXML
@@ -61,10 +85,10 @@ public class OpcionesPController implements Initializable {
         
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Ubicaciones");
-        stage.setMaxHeight(580);
-        stage.setMaxWidth(830);
-        stage.setMinHeight(580);
-        stage.setMinWidth(830);
+        stage.setMaxHeight(400);
+        stage.setMaxWidth(650);
+        stage.setMinHeight(400);
+        stage.setMinWidth(650);
         stage.show();
     }
 
