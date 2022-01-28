@@ -53,10 +53,10 @@ public class OpcionesLController implements Initializable {
         bienvenido.setFill(Color.WHITE);
         bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
-        generaButton.setStyle("-fx-background-color: Blue");
+        generaButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         generaButton.setTextFill(Color.WHITE);
         
-        consultarButton.setStyle("-fx-background-color: Blue");
+        consultarButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         consultarButton.setTextFill(Color.WHITE);
         
         try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/fondo.jpg")){
