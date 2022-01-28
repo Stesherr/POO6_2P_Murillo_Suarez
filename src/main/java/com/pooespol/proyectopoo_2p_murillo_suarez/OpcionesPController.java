@@ -56,10 +56,10 @@ public class OpcionesPController implements Initializable {
         bienvenida.setFill(Color.WHITE);
         bienvenida.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
-        conocerButton.setStyle("-fx-background-color: Blue");
+        conocerButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         conocerButton.setTextFill(Color.WHITE);
         
-        solicitarButton.setStyle("-fx-background-color: Blue");
+        solicitarButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         solicitarButton.setTextFill(Color.WHITE);
         
         try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/fondo.jpg")){
