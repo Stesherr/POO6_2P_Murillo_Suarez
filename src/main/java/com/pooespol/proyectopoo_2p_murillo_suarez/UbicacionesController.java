@@ -160,10 +160,10 @@ public class UbicacionesController implements Initializable {
         
         Button btncerrar = new Button("Cerrar");
 
-        btncerrar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold ; -fx-text-fill: white");
- 
-
         
+        btncerrar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold ; -fx-text-fill: white");
+      
+
         VBox root = new VBox(nombre, direc, horario,  tiempoT, btncerrar);
         
         
