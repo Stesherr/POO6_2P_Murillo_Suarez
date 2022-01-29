@@ -71,6 +71,7 @@ public class UbicacionesController implements Initializable {
             System.out.println("No se encontro la imagen");
         }
         
+        
         ArrayList<Locales> locales = Locales.leerArchivo();
         for(Locales local: locales){
             try {
@@ -81,145 +82,144 @@ public class UbicacionesController implements Initializable {
         }
         
     }  
-    
-    public void crearThreadContador(Label l){
-           Thread t = new Thread(new Runnable(){
+       
+    public void abrirVentanaAdicional(Locales local) throws InterruptedException{
+        
+        
+        final Stage stage = new Stage();
+        stage.setTitle("Detalles");
+
+                    Label nombre = new Label("Vithas Labs " );
+                    nombre.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+                    nombre.setStyle("-fx-text-fill: white");
+                    Label direc = new Label(local.getDireccion() );
+                    Label horario = new Label("Horario:   "+local.getHorario() );
+
+                    Label tiempoT = new Label();
+
+                    Button btncerrar = new Button("Cerrar");
+
+
+                    btncerrar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold ; -fx-text-fill: white");
+
+
+                    VBox root = new VBox(nombre, direc, horario,  tiempoT, btncerrar);
+
+
+                    btncerrar.setOnAction(e -> stage.close());
+
+
+                    root.setAlignment(Pos.CENTER);
+                    root.setSpacing(20);
+                    root.setStyle("-fx-background-color: lightblue");
+
+                    Scene scene = new Scene(root);
+
+                    stage.setScene(scene);
+                    stage.setMaxHeight(300);
+                    stage.setMaxWidth(250);
+                    stage.setMinHeight(300);
+                    stage.setMinWidth(250);
+
+                    stage.show();
+                    
+        Thread t = new Thread(new Runnable(){
                @Override
                public void run() {
                    int i = 0;
-                   while(i<5) {
+                   while(i<=5) {
                        
                        String status = "Mostrando "+(i+1) + " segundos...";
                        Platform.runLater(new Runnable() {
                            @Override
                            public void run() {
-                               l.setText(status);
+                               tiempoT.setText(status);
+                               
                            }
                        });
-                       i++;
-                       try {
-                           Thread.sleep(1000);
-                       } catch (InterruptedException ex) {
-                           ex.printStackTrace();
-                       }
-                       
-                   }
-               }
-           });
-           
-           t.setDaemon(true);
-           t.start();
-           
-   
-    }
-    
-    public void crearThreadCerrarVentana(Stage stag){
-           Thread t = new Thread(new Runnable(){
-               @Override
-               public void run() {
-                   int i = 0;
-                   while(i<6) {
-                       
                        if(i==5){
-                          Platform.runLater(new Runnable() {
+                           Platform.runLater(new Runnable() {
                            @Override
                            public void run() {
-                               stag.close();
-                           }
-                       });
+                                   stage.close();
+                               }});}
                        i++;
                        try {
                            Thread.sleep(1000);
                        } catch (InterruptedException ex) {
                            ex.printStackTrace();
-                       } 
                        }
                        
-                       
                    }
+                   
                }
            });
            
            t.setDaemon(true);
            t.start();
-           
-   
-    }
-    
-    public void abrirVentanaAdicional(Locales local) throws InterruptedException{
-        Stage stage = new Stage();
-        stage.setTitle("Detalles");
         
-        Label nombre = new Label("Vithas Labs " );
-        nombre.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        nombre.setStyle("-fx-text-fill: white");
-        Label direc = new Label(local.getDireccion() );
-        Label horario = new Label("Horario:   "+local.getHorario() );
-        
-        Label tiempoT = new Label();
-        
-        Button btncerrar = new Button("Cerrar");
-
-        
-        btncerrar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold ; -fx-text-fill: white");
-      
-
-        VBox root = new VBox(nombre, direc, horario,  tiempoT, btncerrar);
-        
-        
-        btncerrar.setOnAction(e -> stage.close());
-        
-        
-        root.setAlignment(Pos.CENTER);
-        root.setSpacing(20);
-        root.setStyle("-fx-background-color: lightblue");
-                
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.setMaxHeight(300);
-        stage.setMaxWidth(250);
-        stage.setMinHeight(300);
-        stage.setMinWidth(250);
-        
-        stage.show();
-        crearThreadContador(tiempoT);
-        crearThreadCerrarVentana(stage);
-        
-        
-        
-     
      }
     
     
      public void construirPane(Locales local) throws InterruptedException{
-        /*andom rand = new Random();
-        int segundos = rand.nextInt(11)*1000;
-        wait(segundos);*/
         ImageView imgView = null;
         try(FileInputStream fis = new FileInputStream("src/main/resources/imagenes/indicador.jpg")) {
             Image img = new Image(fis, 30, 30, false, false);
             imgView = new ImageView(img);
-            
         } catch(IOException e) {
             System.out.println("Imagen no encontrada...");
         }
-         imgView.relocate(local.getCoordenadaX(), local.getCoordenadaY());
-         root.getChildren().addAll(imgView);
+        
+        imgView.relocate(local.getCoordenadaX(), local.getCoordenadaY());
+        
+        root.getChildren().addAll(imgView);
+        
+        imgView.setVisible(false);
+          
+        final ImageView imgView1 = imgView;
+        imgView1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent t) {
+                                System.out.println("Abriendo nueva ventana...");
+                                try {
+                                    abrirVentanaAdicional(local);
+                                } catch (InterruptedException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }          
+
+                        });  
+        
+        Thread thread = new Thread(new Runnable(){
+                @Override
+                public void run(){
+                    
+                    Random rand = new Random();
+                    int h = rand.nextInt(11);
+                    int segundos = h*1000;
+                    
+                        
+                        try{
+                            Thread.sleep(segundos);                      
+                        }catch(InterruptedException ex){
+                            System.out.println("Se ha interrupindo el hilo");
+                        }
+                        
+                        imgView1.setVisible(true);
+                        
+                        
+                        
+                    }
+                
+            });
+        
+        thread.start();
+    
+
          
          
-         imgView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                System.out.println("Abriendo nueva ventana...");
-                try {
-                    abrirVentanaAdicional(local);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-             
-         });
+         
+         
          
      }
     

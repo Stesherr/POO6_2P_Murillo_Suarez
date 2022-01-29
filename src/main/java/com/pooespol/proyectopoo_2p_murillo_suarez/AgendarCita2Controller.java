@@ -45,6 +45,8 @@ import javafx.stage.Stage;
  */
 public class AgendarCita2Controller implements Initializable {
     
+    public static Stage vFinal = new Stage();
+    
     public Solicitud solicit;
     public Double x = 0.0;
     public Double y = 0.0;
@@ -113,6 +115,9 @@ public class AgendarCita2Controller implements Initializable {
 
     @FXML
     private void finalizar(ActionEvent event) throws IOException {
+        if(x==0.0 || y==0.0){
+            System.out.println("no se ha seleccionado la ubicacion");
+        }else{
         try{
             String date = fecha.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Double total = subT+5;
@@ -122,20 +127,25 @@ public class AgendarCita2Controller implements Initializable {
                 //solicit.detallarArchivo(pru);
             }
             //solicit.enviarCorreo(pac);
-            Stage stage = new Stage();
-        
+
+    /**
+     *
+     */
+    
+            
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "mensaje.fxml"));
         
-            stage.setScene(new Scene(fxmlLoader.load()));
-            stage.setTitle("Información final");
-            stage.show();
+            vFinal.setScene(new Scene(fxmlLoader.load()));
+            vFinal.setTitle("Información final");
+            
+            vFinal.show();
+            
         }catch(NullPointerException e){
             System.out.println("algunos espacios no han sido llenados");
         }
         
         
         
-        
-    }
+    }}
     
 }
