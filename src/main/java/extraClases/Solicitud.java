@@ -5,6 +5,7 @@
  */
 package extraClases;
 
+import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.tests;
 import generalClases.Paciente;
 import generalClases.Usuario;
 import java.io.BufferedReader;
@@ -234,9 +235,19 @@ public class Solicitud {
             message.setFrom(new InternetAddress(remitente));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(pa.getEmail()));   //Se podrían añadir varios de la misma manera
             message.setSubject("Información de su solicitud");
+            String nombres ="";
+            for (Prueba p: tests){
+                int k = 0;
+                if(k==0){
+                    nombres.concat("  "+p.getNombrePrueba());
+                    k++;
+                }else{
+                nombres.concat(", "+p.getNombrePrueba());
+                }
+            }
             message.setText("FECHA: "+this.fecha+"\n" +
                             "HORA; "+this.hora+"\n" +
-                           "PRUEBAS SOLICITADAS; "+"\n" +
+                           "PRUEBAS SOLICITADAS;"+nombres+"\n" +
                             "CÓDIGO para consultar resultados posteriormente: "+this.codigo);
             Transport transport = session.getTransport("smtp");
             transport.connect("smtp.gmail.com", remitente, clave);
