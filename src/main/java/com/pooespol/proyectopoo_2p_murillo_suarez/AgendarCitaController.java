@@ -6,6 +6,7 @@
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.stage;
+import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.tests;
 import extraClases.Prueba;
 import generalClases.Paciente;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class AgendarCitaController implements Initializable {
 
     public static ArrayList<Prueba> pruebas = Prueba.leerArchivo();   
     public static Double subT = 0.0;
-    public static ArrayList tests = new ArrayList();
+    
     
     @FXML
     private TextField cantidad;
@@ -78,7 +79,7 @@ public class AgendarCitaController implements Initializable {
 
     @FXML
     private void desplegarTipoP(ActionEvent event) {
-        System.out.println(tests.size());
+        
         valorU.setText(null);
         
         String opcion =  tipoPVBox.getValue();
@@ -103,32 +104,41 @@ public class AgendarCitaController implements Initializable {
         String cant = cantidad.getText();
         Prueba opcion;
         Double precio;
+        int indicador = 0;
         try{
         opcion =  pruebaVBox.getValue();
+        
         precio = (Double.parseDouble(valorU.getText()))*(Integer.parseInt(cant));
         subT = subT+precio;
         Double tota = 5.0 +subT;
         subTotal.setText(subT.toString());
         serDomicilio.setText("5.00");
         total.setText(tota.toString());
-        ArrayList elemento = new ArrayList();
-        elemento.add(cant);
-        elemento.add(opcion.getNombrePrueba());
-        tests.add(elemento);
+        
+        if(indicador ==0){
+            tests.add(opcion);
+            
+        }
         }catch(Exception e){
+            indicador = 1;
             System.out.println(" Campos incompletos, no se puede agregar");
         }
+        
         
     }
 
     @FXML
     private void continuar(ActionEvent event) throws IOException {
+        if(tests.size()!=0){
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "agendarCita2.fxml"));
         
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Agendar Prueba");
        
         stage.show();
+        }else{
+            System.out.println("no se ha agregado ninguna prueba ");
+        }
     }
     
 }

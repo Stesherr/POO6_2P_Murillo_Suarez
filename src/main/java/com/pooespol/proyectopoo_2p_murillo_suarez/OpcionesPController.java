@@ -6,10 +6,12 @@
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 import static com.pooespol.proyectopoo_2p_murillo_suarez.PaginaIController.cliente;
+import extraClases.Prueba;
 import generalClases.Paciente;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +39,7 @@ public class OpcionesPController implements Initializable {
 
     public static Paciente pac = Paciente.obtenerPaciente(cliente);
     public static Stage stage = new Stage();
+    public static ArrayList<Prueba> tests = new ArrayList<Prueba>();
     
     @FXML
     private Text bienvenida;
@@ -94,7 +97,7 @@ public class OpcionesPController implements Initializable {
 
     @FXML
     private void solicitarPruebas(ActionEvent event) throws IOException {
-        
+        tests = new ArrayList<>();
         
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "agendarCita.fxml"));
         

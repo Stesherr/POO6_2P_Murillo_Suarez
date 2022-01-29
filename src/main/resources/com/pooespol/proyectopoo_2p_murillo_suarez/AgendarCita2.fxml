@@ -5,15 +5,15 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCita2Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCita2Controller">
    <children>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
          <children>
@@ -38,11 +38,9 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" prefHeight="386.0" prefWidth="600.0">
          <children>
-
-            <ImageView fx:id="mapa" fitHeight="150.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true" />
-
+            <Pane fx:id="pane" prefHeight="118.0" prefWidth="600.0" />
          </children>
       </HBox>
       <HBox prefHeight="150.0" prefWidth="200.0">
@@ -66,12 +64,12 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="hora" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <DatePicker fx:id="fecha" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -91,7 +89,10 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="botonFinalizar" mnemonicParsing="false" style="-fx-font-weight: Bold;" text="Finalizar" />
+            <Button fx:id="botonFinalizar" mnemonicParsing="false" onAction="#finalizar" style="-fx-font-weight: Bold;" text="Finalizar">
+               <HBox.margin>
+                  <Insets left="75.0" />
+               </HBox.margin></Button>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />
