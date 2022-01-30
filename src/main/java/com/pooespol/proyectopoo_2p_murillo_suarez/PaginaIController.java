@@ -79,7 +79,7 @@ public  class PaginaIController implements Initializable {
         ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
         ArrayList<Usuario> posiblesUsers = new ArrayList<>();
         
-         
+        int g = 0; 
         for(Usuario usuario : usuarios){    
             if(user.getText().equalsIgnoreCase("")||contra.getText().equalsIgnoreCase("")){
                 System.out.println("hay cuadros de texto sin rellenar");
@@ -105,9 +105,12 @@ public  class PaginaIController implements Initializable {
                     }else{
                         System.out.println("contraseña incorrecta");
                     }
-                }else{
+            }else{
+                g++;
+                if (g == usuarios.size()){
                    System.out.println("este usuario no se encuentra registrado en el sistema"); 
                 }
+            }
         }
 
                 

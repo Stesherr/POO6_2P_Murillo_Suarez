@@ -109,6 +109,7 @@ public class Paciente extends Usuario{
         this.telefono = telefono;
     }
     
+
     // Metodo que lee el archivo pacientes.txt y retorna una lista de sus datos
     public static ArrayList<Paciente> leerPacientes(){
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
