@@ -75,8 +75,8 @@ public class Consolidado implements Serializable{
         return consolidado;
     }
     
-    public static void escribirConsolidado(Consolidado consolidado){
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/resources/docs/consolidado.dat",true))){
+    public static void escribirConsolidado(ArrayList<Consolidado> consolidado){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/resources/docs/consolidado.dat"))){
             oos.writeObject(consolidado);
         }catch(IOException ex){
             
@@ -87,8 +87,7 @@ public class Consolidado implements Serializable{
         ArrayList<Consolidado> consolidados = new ArrayList<>();
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/resources/docs/consolidado.dat"))){
             while(true){
-                Consolidado con = (Consolidado)ois.readObject();
-                System.out.println(con);
+                consolidados = (ArrayList<Consolidado>) ois.readObject();
             }            
                   
         }catch (ClassNotFoundException e){
@@ -100,8 +99,14 @@ public class Consolidado implements Serializable{
 
     }
     
+
     
     public static void main(String[] args){
-        leerConsolidado();
+        for(Consolidado con : leerConsolidado()){
+            System.out.println(con.getNombre() + " " + con.getApellido());
+        }
+        
+        
     }
+    
 }

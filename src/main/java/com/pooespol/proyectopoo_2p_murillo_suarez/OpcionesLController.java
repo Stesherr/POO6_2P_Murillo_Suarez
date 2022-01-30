@@ -45,7 +45,7 @@ public class OpcionesLController implements Initializable {
     private Text mensage;
     @FXML
     private GridPane root;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -54,6 +54,8 @@ public class OpcionesLController implements Initializable {
         // cambio de colores a los botones
         bienvenido.setFill(Color.WHITE);
         bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
+        
+        mensage.setFill(Color.WHITE);
         
         generaButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         generaButton.setTextFill(Color.WHITE);
@@ -78,9 +80,12 @@ public class OpcionesLController implements Initializable {
     @FXML
     private void generarConsolidado(ActionEvent event) {
         ArrayList<Consolidado> consolidados = Consolidado.leerContrataciones();
-        for(Consolidado cons : consolidados){
-            Consolidado.escribirConsolidado(cons);
-        }
+        
+        Consolidado.escribirConsolidado(consolidados);
+        
+        mensage.setText("Se ha generado el consolidado");
+        
+
     }
 
     @FXML
@@ -92,6 +97,7 @@ public class OpcionesLController implements Initializable {
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Consultar Citas");
        
+        
         stage.show();
     }
     
