@@ -5,9 +5,11 @@
  */
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
+import extraClases.Consolidado;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,7 +77,10 @@ public class OpcionesLController implements Initializable {
 
     @FXML
     private void generarConsolidado(ActionEvent event) {
-        
+        ArrayList<Consolidado> consolidados = Consolidado.leerContrataciones();
+        for(Consolidado cons : consolidados){
+            Consolidado.escribirConsolidado(cons);
+        }
     }
 
     @FXML

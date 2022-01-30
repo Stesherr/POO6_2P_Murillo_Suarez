@@ -6,7 +6,7 @@
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 
-import com.google.inject.Stage;
+//import com.google.inject.Stage;
 import static com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCita2Controller.vFinal;
 import java.net.URL;
 import java.util.ResourceBundle;

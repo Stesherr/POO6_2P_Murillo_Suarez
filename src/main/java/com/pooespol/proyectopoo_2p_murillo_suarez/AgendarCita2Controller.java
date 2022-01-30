@@ -119,14 +119,14 @@ public class AgendarCita2Controller implements Initializable {
             System.out.println("no se ha seleccionado la ubicacion");
         }else{
         try{
-            String date = fecha.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String date = fecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             Double total = subT+5;
             solicit = new Solicitud(pac, direccion.getText(), date, hora.getText(), x, y, total);
-            //solicit.escribirArchivo();
+            solicit.escribirArchivo();
             for(Prueba pru: tests){
-                //solicit.detallarArchivo(pru);
+                solicit.detallarArchivo(pru);
             }
-            //solicit.enviarCorreo(pac);
+            solicit.enviarCorreo(pac);
 
     /**
      *

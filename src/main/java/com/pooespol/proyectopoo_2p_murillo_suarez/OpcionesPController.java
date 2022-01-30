@@ -40,7 +40,7 @@ public class OpcionesPController implements Initializable {
     public static Paciente pac = Paciente.obtenerPaciente(cliente);
     public static Stage stage = new Stage();
     public static ArrayList<Prueba> tests = new ArrayList<Prueba>();
-    
+
     @FXML
     private Text bienvenida;
     @FXML
@@ -57,35 +57,42 @@ public class OpcionesPController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // cambio de colores a los botones
         bienvenida.setFill(Color.WHITE);
-        bienvenida.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
-        
+        char letraM = pac.getNombres().toUpperCase().charAt(0);
+        String cadena = pac.getNombres().substring(1);
+
+        if (pac.getGenero().equals("Masculino")) {
+            bienvenida.setText("Bienvenido " + letraM + cadena);
+        } else if (pac.getGenero().equals("Femenino")) {
+            bienvenida.setText("Bienvenida " + letraM + cadena);
+        } else {
+            bienvenida.setText("Bienvenid@ " + letraM + cadena);
+        }
+
         conocerButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         conocerButton.setTextFill(Color.WHITE);
-        
+
         solicitarButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         solicitarButton.setTextFill(Color.WHITE);
-        
-        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/fondo.jpg")){
-            Image i=new Image(input,2000, 2000, true, true);
-            
+
+        try (FileInputStream input = new FileInputStream("src/main/resources/imagenes/fondo.jpg")) {
+            Image i = new Image(input, 2000, 2000, true, true);
+
             BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-            
+
             Background pica = new Background(pic);
             root.setBackground(pica);
-            
-            
-            
-        }catch(IOException f){
+
+        } catch (IOException f) {
             System.out.println("No se encontro la imagen");
         }
-    }    
+    }
 
     @FXML
     private void conocerUbicaciones(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "ubicaciones.fxml"));
-        
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ubicaciones.fxml"));
+
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Ubicaciones");
         stage.setMaxHeight(400);
@@ -98,13 +105,13 @@ public class OpcionesPController implements Initializable {
     @FXML
     private void solicitarPruebas(ActionEvent event) throws IOException {
         tests = new ArrayList<>();
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "agendarCita.fxml"));
-        
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("agendarCita.fxml"));
+
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.setTitle("Agendar Prueba");
-       
+
         stage.show();
     }
-    
+
 }
