@@ -140,11 +140,6 @@ public class AgendarCitaController implements Initializable {
             cantidadVb.getChildren().add(cantidad);
             precioVb.getChildren().add(precioL);
             
-            if (indicador == 0) {
-                tests.add(opcion);
-                for(int i=0; i<tests.size(); i++){
-                }
-            }
         } catch (Exception e) {
             
             System.out.println(" Campos incompletos, no se puede agregar");
