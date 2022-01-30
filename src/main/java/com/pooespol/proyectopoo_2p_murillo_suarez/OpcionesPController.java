@@ -39,7 +39,7 @@ public class OpcionesPController implements Initializable {
 
     public static Paciente pac = Paciente.obtenerPaciente(cliente);
     public static Stage stage = new Stage();
-    public static ArrayList<Prueba> tests = new ArrayList<Prueba>();
+    
 
     @FXML
     private Text bienvenida;
@@ -104,7 +104,7 @@ public class OpcionesPController implements Initializable {
 
     @FXML
     private void solicitarPruebas(ActionEvent event) throws IOException {
-        tests = new ArrayList<>();
+        
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("agendarCita.fxml"));
 

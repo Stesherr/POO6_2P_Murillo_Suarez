@@ -6,7 +6,7 @@
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.stage;
-import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.tests;
+
 import extraClases.Prueba;
 import generalClases.Paciente;
 import java.io.IOException;
@@ -36,6 +36,12 @@ public class AgendarCitaController implements Initializable {
 
     public static ArrayList<Prueba> pruebas = Prueba.leerArchivo();
     public static Double subT = 0.0;
+    public static ArrayList<String> nombres ;
+    public static ArrayList<Prueba> tests ;
+
+   
+    
+    
 
     @FXML
     private TextField cantidad;
@@ -69,6 +75,9 @@ public class AgendarCitaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        nombres = new ArrayList<>();
+        tests = new ArrayList<Prueba>();
+        subT = 0.0;
         ArrayList tipos = Prueba.cargarTipoP();
         tipoPVBox.getItems().setAll(tipos);
 
@@ -97,6 +106,8 @@ public class AgendarCitaController implements Initializable {
 
     @FXML
     private void desplegarPrueba(ActionEvent event) {
+        valorU.setText(null);
+        valorU.setText(null);
         Prueba opcion = pruebaVBox.getValue();
         valorU.setText(opcion.getPrecio().toString());
 
@@ -108,10 +119,13 @@ public class AgendarCitaController implements Initializable {
         Prueba opcion;
         Double precio;
         
-        int indicador = 0;
+        
         try {            
             opcion = pruebaVBox.getValue();            
             precio = (Double.parseDouble(valorU.getText())) * (Integer.parseInt(cant));
+            tests.add(opcion);
+            nombres.add(opcion.getNombrePrueba());
+            System.out.println(opcion.getNombrePrueba());
             subT = subT + precio;
             Double tota = 5.0 + subT;
             subTotal.setText(subT.toString());
@@ -125,15 +139,12 @@ public class AgendarCitaController implements Initializable {
             cantidadVb.getChildren().add(cantidad);
             precioVb.getChildren().add(precioL);
             
-            if (indicador == 0) {
-                tests.add(opcion);
-                for(int i=0; i<tests.size(); i++){
-                    
-                }
+            
+            
 
-            }
+            
         } catch (Exception e) {
-            indicador = 1;
+            
             System.out.println(" Campos incompletos, no se puede agregar");
         }
 

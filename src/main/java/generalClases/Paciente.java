@@ -111,17 +111,7 @@ public class Paciente extends Usuario{
     
     
     
-    public ArrayList<Locales> conocerUbicaciones(){
-        ArrayList<Locales> ubicaciones = new ArrayList<Locales>();
-        //leer locales y agregar a ubicaciones
-        return ubicaciones;
-    }
     
-    public ArrayList<Prueba> solicitarPruebas(){
-        ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
-        //leer pruebas y agregar a pruebas arraylist de arraylist de 2 elementos(cant, nomPrueba)
-        return pruebas;
-    }
     
     public static ArrayList<Paciente> leerPacientes(){
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();

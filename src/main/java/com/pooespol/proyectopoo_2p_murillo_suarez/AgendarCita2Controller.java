@@ -5,10 +5,12 @@
  */
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
+import static com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCitaController.nombres;
 import static com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCitaController.subT;
+import static com.pooespol.proyectopoo_2p_murillo_suarez.AgendarCitaController.tests;
 
 import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.pac;
-import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.tests;
+
 import extraClases.Prueba;
 import extraClases.Solicitud;
 import java.io.FileInputStream;
@@ -24,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -58,7 +61,7 @@ public class AgendarCita2Controller implements Initializable {
     @FXML
     private TextField direccion;
     @FXML
-    private TextField hora;
+    private ComboBox<String> hora;
     @FXML
     private DatePicker fecha;
     @FXML
@@ -70,6 +73,7 @@ public class AgendarCita2Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        hora.getItems().addAll("10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:0","18:00","19:00","20:00");
         
         botonFinalizar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         botonFinalizar.setTextFill(Color.WHITE);
@@ -121,12 +125,19 @@ public class AgendarCita2Controller implements Initializable {
         try{
             String date = fecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             Double total = subT+5;
-            solicit = new Solicitud(pac, direccion.getText(), date, hora.getText(), x, y, total);
+            solicit = new Solicitud(pac, direccion.getText(), date, hora.getValue(), x, y, total);
             solicit.escribirArchivo();
             for(Prueba pru: tests){
                 solicit.detallarArchivo(pru);
             }
-            solicit.enviarCorreo(pac);
+            String nombre = "";
+            for(String str : nombres){
+                nombre+="\n";
+                nombre+=str;
+                
+            }
+            solicit.enviarCorreo(pac, nombre);
+            
 
     /**
      *
