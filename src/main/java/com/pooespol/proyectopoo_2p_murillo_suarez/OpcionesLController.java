@@ -7,7 +7,9 @@ package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 import extraClases.Consolidado;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -51,6 +53,8 @@ public class OpcionesLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         // cambio de colores a los botones
         bienvenido.setFill(Color.WHITE);
         bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
@@ -83,6 +87,7 @@ public class OpcionesLController implements Initializable {
         
         Consolidado.escribirConsolidado(consolidados);
         
+        mensage.setFill(Color.WHITE);
         mensage.setText("Se ha generado el consolidado");
         
 
@@ -90,15 +95,22 @@ public class OpcionesLController implements Initializable {
 
     @FXML
     private void consultarCitas(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
+        if(mensage.getText().equalsIgnoreCase("Se ha generado el consolidado")){
+             Stage stage = new Stage();
         
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "consultarCitas.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "consultarCitas.fxml"));
         
-        stage.setScene(new Scene(fxmlLoader.load()));
-        stage.setTitle("Consultar Citas");
+            stage.setScene(new Scene(fxmlLoader.load()));
+            stage.setTitle("Consultar Citas");
        
         
-        stage.show();
+            stage.show();
+        }else{
+            mensage.setFill(Color.RED);
+            mensage.setText("Debe generar el sonsolidado antes de consultar");
+        
+    }
+        
     }
     
 }
