@@ -59,7 +59,7 @@ public class OpcionesLController implements Initializable {
         bienvenido.setFill(Color.WHITE);
         bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
-        mensage.setFill(Color.WHITE);
+        
         
         generaButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         generaButton.setTextFill(Color.WHITE);
@@ -80,7 +80,8 @@ public class OpcionesLController implements Initializable {
             System.out.println("No se encontro la imagen");
         }
     }    
-
+    
+    // EventController para generar el consolidado de los pacientes
     @FXML
     private void generarConsolidado(ActionEvent event) {
         ArrayList<Consolidado> consolidados = Consolidado.leerContrataciones();
@@ -89,28 +90,31 @@ public class OpcionesLController implements Initializable {
         
         mensage.setFill(Color.WHITE);
         mensage.setText("Se ha generado el consolidado");
+        mensage.setFill(Color.WHITE);
+        mensage.setStyle("-fx-font-weight: bold");
         
 
     }
 
     @FXML
     private void consultarCitas(ActionEvent event) throws IOException {
+
         if(mensage.getText().equalsIgnoreCase("Se ha generado el consolidado")){
              Stage stage = new Stage();
+
         
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "consultarCitas.fxml"));
         
             stage.setScene(new Scene(fxmlLoader.load()));
             stage.setTitle("Consultar Citas");
-       
-        
+
             stage.show();
         }else{
             mensage.setFill(Color.RED);
             mensage.setText("Debe generar el sonsolidado antes de consultar");
         
     }
-        
+
     }
     
 }

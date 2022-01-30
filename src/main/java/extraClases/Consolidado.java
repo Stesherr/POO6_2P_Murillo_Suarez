@@ -75,14 +75,16 @@ public class Consolidado implements Serializable{
         return consolidado;
     }
     
+    // Metodo para crear un archivo serializado
     public static void escribirConsolidado(ArrayList<Consolidado> consolidado){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/resources/docs/consolidado.dat"))){
             oos.writeObject(consolidado);
         }catch(IOException ex){
-            
+            System.out.println("No se ha podido escribir el archivo");
         }
     }
     
+    // Metodo para leer un archivo serializado
     public static ArrayList<Consolidado> leerConsolidado(){
         ArrayList<Consolidado> consolidados = new ArrayList<>();
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/resources/docs/consolidado.dat"))){
@@ -91,8 +93,8 @@ public class Consolidado implements Serializable{
             }            
                   
         }catch (ClassNotFoundException e){
-            
-        }catch(IOException ex){
+            System.out.println("No se ha podido leer el archivo serializado");
+        }catch(IOException e){
             
         }
         return consolidados;

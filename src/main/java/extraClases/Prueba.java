@@ -72,7 +72,7 @@ public class Prueba {
     }
     
     
-    
+    // Metodo para leer el archivo pruebas.txt y cargarlo a un ArrayList
     public static ArrayList<Prueba> leerArchivo(){
         ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
         File file = new File("src/main/resources/docs/pruebas.txt");
