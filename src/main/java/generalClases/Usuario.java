@@ -57,15 +57,11 @@ public class Usuario {
         return usuario;
     }
 
-    
-    
-    
-    
-    public static ArrayList<Usuario> leerUsuarios(){
+    // Metodo para leer el archivo usuarios.txt y retornar una lista con objetos de tipo Usuario
+    public static ArrayList<Usuario> leerUsuarios() {
 
         ArrayList<Usuario> usuarios = new ArrayList();
-        try ( BufferedReader bf = new BufferedReader(new FileReader( "src/main/resources/docs/usuarios.txt"))) {
-
+        try (BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/usuarios.txt"))){
 
             String linea;
             while ((linea = bf.readLine()) != null) {
@@ -82,7 +78,8 @@ public class Usuario {
         }
         return usuarios;
     }
-
+    
+    // Metodo para escribir en el archivo usuarios.txt los nuevos ingresados al sistema
     public void escribirArchivo() {
 
         ArrayList<Usuario> usuarios = Usuario.leerUsuarios();
@@ -99,23 +96,15 @@ public class Usuario {
             }
         }
 
-        if(h==usuarios.size()){
+        if (h == usuarios.size()) {
 
-            try (FileWriter escribir = new FileWriter("src/main/resources/docs/usuarios.txt",true)) {
-                 escribir.write(this.usuario+","+this.contraseña+","+this.tipo+"\n");
-               
-            }catch(IOException e){
-        System.out.println("Error al escribir el archivo usuarios");
+            try (FileWriter escribir = new FileWriter("src/main/resources/docs/usuarios.txt", true)) {
+                escribir.write(this.usuario + "," + this.contraseña + "," + this.tipo + "\n");
+
+            } catch (IOException e) {
+                System.out.println("Error al escribir el archivo usuarios");
+            }
         }
-    }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        // TODO code application logic here
     }
 
 }

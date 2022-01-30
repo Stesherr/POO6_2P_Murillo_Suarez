@@ -55,7 +55,7 @@ public class OpcionesLController implements Initializable {
         bienvenido.setFill(Color.WHITE);
         bienvenido.setText("Bienvenid@ "+PaginaIController.cliente.getUsuario());
         
-        mensage.setFill(Color.WHITE);
+        
         
         generaButton.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         generaButton.setTextFill(Color.WHITE);
@@ -76,7 +76,8 @@ public class OpcionesLController implements Initializable {
             System.out.println("No se encontro la imagen");
         }
     }    
-
+    
+    // EventController para generar el consolidado de los pacientes
     @FXML
     private void generarConsolidado(ActionEvent event) {
         ArrayList<Consolidado> consolidados = Consolidado.leerContrataciones();
@@ -84,21 +85,31 @@ public class OpcionesLController implements Initializable {
         Consolidado.escribirConsolidado(consolidados);
         
         mensage.setText("Se ha generado el consolidado");
+        mensage.setFill(Color.WHITE);
+        mensage.setStyle("-fx-font-weight: bold");
         
 
     }
 
     @FXML
     private void consultarCitas(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
+        ArrayList<Consolidado> consolidados = Consolidado.leerConsolidado();
+        if(consolidados.size() != 0){
+            mensage.setText("");
+            Stage stage = new Stage();
         
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "consultarCitas.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "consultarCitas.fxml"));
         
-        stage.setScene(new Scene(fxmlLoader.load()));
-        stage.setTitle("Consultar Citas");
-       
-        
-        stage.show();
+            stage.setScene(new Scene(fxmlLoader.load()));
+            stage.setTitle("Consultar Citas");
+
+            stage.show();
+        }
+        else{
+            mensage.setText("Debe generar el consolidado antes de consultar");
+            mensage.setFill(Color.RED);
+            mensage.setStyle("-fx-font-weight: bold");
+        }
     }
     
 }

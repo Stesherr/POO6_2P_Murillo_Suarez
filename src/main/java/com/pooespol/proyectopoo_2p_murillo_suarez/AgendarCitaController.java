@@ -101,7 +101,8 @@ public class AgendarCitaController implements Initializable {
         valorU.setText(opcion.getPrecio().toString());
 
     }
-
+    
+    // EventController para agregar los datos ingresados en el detalle de cita y el total a pagar 
     @FXML
     private void agregarP(ActionEvent event) {
         String cant = cantidad.getText();
@@ -128,9 +129,7 @@ public class AgendarCitaController implements Initializable {
             if (indicador == 0) {
                 tests.add(opcion);
                 for(int i=0; i<tests.size(); i++){
-                    
                 }
-
             }
         } catch (Exception e) {
             indicador = 1;
@@ -138,7 +137,8 @@ public class AgendarCitaController implements Initializable {
         }
 
     }
-
+    
+    // EventController para cambiar de ventana a la de AgendarCita2
     @FXML
     private void continuar(ActionEvent event) throws IOException {
         if (tests.size() != 0) {

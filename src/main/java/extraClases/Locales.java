@@ -78,7 +78,7 @@ public class Locales {
     }
     
     
-    
+    // Metodo para leer el archivo sucursales.txt y retornar una lista tipo ArrayList
     public static ArrayList<Locales> leerArchivo(){//horario guarda como vacio
         ArrayList<Locales> lista = new ArrayList<Locales>();
         File file = new File("src/main/resources/docs/sucursales.txt");

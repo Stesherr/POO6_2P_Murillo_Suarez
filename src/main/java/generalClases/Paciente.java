@@ -109,20 +109,7 @@ public class Paciente extends Usuario{
         this.telefono = telefono;
     }
     
-    
-    
-    public ArrayList<Locales> conocerUbicaciones(){
-        ArrayList<Locales> ubicaciones = new ArrayList<Locales>();
-        //leer locales y agregar a ubicaciones
-        return ubicaciones;
-    }
-    
-    public ArrayList<Prueba> solicitarPruebas(){
-        ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
-        //leer pruebas y agregar a pruebas arraylist de arraylist de 2 elementos(cant, nomPrueba)
-        return pruebas;
-    }
-    
+    // Metodo que lee el archivo pacientes.txt y retorna una lista de sus datos
     public static ArrayList<Paciente> leerPacientes(){
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
         try ( BufferedReader bf = new BufferedReader(new FileReader("src/main/resources/docs/pacientes.txt"))) {
@@ -150,7 +137,7 @@ public class Paciente extends Usuario{
         return pacientes;
     }
     
-    
+    // Metodo para escribir en pacientes.txt los nuevos pacientes que se registren
     public void escribirArchivo (){
         if(Paciente.leerPacientes()==null){
             try
@@ -191,10 +178,7 @@ public class Paciente extends Usuario{
                 }
                 super.escribirArchivo();
             }
-        
-        
         }
-        
     }
     
     public static Paciente obtenerPaciente(Usuario p){

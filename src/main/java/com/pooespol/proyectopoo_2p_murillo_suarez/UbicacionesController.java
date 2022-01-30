@@ -58,7 +58,7 @@ public class UbicacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/mapa.jpg")){
+        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/mapa.jpg")){ //Archivo tipo .jpg
             Image i=new Image(input,800, 1200, true, true);
             
             BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -122,8 +122,8 @@ public class UbicacionesController implements Initializable {
                     stage.setMinWidth(250);
 
                     stage.show();
-                    
-        Thread t = new Thread(new Runnable(){
+        // Thread para el contador de segundos de la ventana            
+        Thread t = new Thread(new Runnable(){ 
                @Override
                public void run() {
                    int i = 0;
@@ -163,7 +163,7 @@ public class UbicacionesController implements Initializable {
     
      public void construirPane(Locales local) throws InterruptedException{
         ImageView imgView = null;
-        try(FileInputStream fis = new FileInputStream("src/main/resources/imagenes/indicador.jpg")) {
+        try(FileInputStream fis = new FileInputStream("src/main/resources/imagenes/indicador.jpg")) { //Archivo tipo .jpg
             Image img = new Image(fis, 30, 30, false, false);
             imgView = new ImageView(img);
         } catch(IOException e) {
@@ -189,7 +189,7 @@ public class UbicacionesController implements Initializable {
                             }          
 
                         });  
-        
+        // Thread para mostrar las ubicaciones al azar cada x segundos
         Thread thread = new Thread(new Runnable(){
                 @Override
                 public void run(){

@@ -32,6 +32,7 @@ public class MensajeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Thread para mostrar el contador de segundos y llegado a los 5 segundos cerrar el programa
         Thread thread = new Thread(new Runnable(){
                 @Override
                 public void run(){

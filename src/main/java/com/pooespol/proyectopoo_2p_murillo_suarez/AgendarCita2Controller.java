@@ -126,12 +126,7 @@ public class AgendarCita2Controller implements Initializable {
             for(Prueba pru: tests){
                 solicit.detallarArchivo(pru);
             }
-            solicit.enviarCorreo(pac);
-
-    /**
-     *
-     */
-    
+            solicit.enviarCorreo(pac); 
             
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "mensaje.fxml"));
         
@@ -143,9 +138,7 @@ public class AgendarCita2Controller implements Initializable {
         }catch(NullPointerException e){
             System.out.println("algunos espacios no han sido llenados");
         }
-        
-        
-        
+     
     }}
     
 }
