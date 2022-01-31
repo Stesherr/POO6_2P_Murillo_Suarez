@@ -50,13 +50,14 @@ public class ConsultarCitasController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         ArrayList<Consolidado> consolidado = Consolidado.leerConsolidado();
         Label nombre;
         Label apellido;
         Label fecha;
         Label numSolic;
         for(Consolidado cons : consolidado){
+            System.out.println(cons.getNombre());
             nombre = new Label(cons.getNombre());
             apellido = new Label(cons.getApellido());
             fecha = new Label (cons.getFecha());
