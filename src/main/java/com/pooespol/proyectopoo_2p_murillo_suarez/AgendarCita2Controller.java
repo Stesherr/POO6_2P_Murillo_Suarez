@@ -47,15 +47,14 @@ import javafx.stage.Stage;
  * @author josem
  */
 public class AgendarCita2Controller implements Initializable {
-    
+
     public static Stage vFinal = new Stage();
-    
+
     public Solicitud solicit;
     public Double x = 0.0;
     public Double y = 0.0;
     public int j = 0;
 
-    
     @FXML
     private Button botonFinalizar;
     @FXML
@@ -66,90 +65,86 @@ public class AgendarCita2Controller implements Initializable {
     private DatePicker fecha;
     @FXML
     private Pane pane;
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        hora.getItems().addAll("10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:0","18:00","19:00","20:00");
-        
+        hora.getItems().addAll("10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:0", "18:00", "19:00", "20:00");
+
         botonFinalizar.setStyle("-fx-background-color: #3066e3 ; -fx-font-weight: bold");
         botonFinalizar.setTextFill(Color.WHITE);
-        
-        try(FileInputStream input=new FileInputStream("src/main/resources/imagenes/mapa.jpg")){
-            Image i=new Image(input,800, 1200, true, true);
-            
-            
+
+        try (FileInputStream input = new FileInputStream("src/main/resources/imagenes/mapa.jpg")) {
+            Image i = new Image(input, 800, 1200, true, true);
+
             BackgroundImage pic = new BackgroundImage(i, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-            
+
             Background pica = new Background(pic);
             pane.setBackground(pica);
-            
-            try(FileInputStream fis = new FileInputStream("src/main/resources/imagenes/posicionador.jpg")) {
+
+            try (FileInputStream fis = new FileInputStream("src/main/resources/imagenes/posicionador.jpg")) {
                 Image img = new Image(fis, 30, 30, false, false);
                 ImageView imgView = new ImageView(img);
                 
-                
-                
-                    pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
-                    x = t.getX();
-                    y = t.getY();
-                    imgView.relocate(t.getX()-15, t.getY()-30);
-                    if(j==0){
-                    pane.getChildren().addAll(imgView);
-                    j++;
-                    } 
-                }
-             
-            });
-                
-                
-            } catch(IOException e) {
+                // Diseño dinámico de la interfaz para mostrar un indicador donde cliquea el usuario
+                pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        x = t.getX();
+                        y = t.getY();
+                        imgView.relocate(t.getX() - 15, t.getY() - 30);
+                        if (j == 0) {
+                            pane.getChildren().addAll(imgView);
+                            j++;
+                        }
+                    }
+
+                });
+
+            } catch (IOException e) {
                 System.out.println("Imagen no encontrada...");
             }
-            
-        }catch(IOException f){
+
+        } catch (IOException f) {
             System.out.println("No se encontro la imagen");
         }
-    }    
+    }
 
     @FXML
     private void finalizar(ActionEvent event) throws IOException {
-        if(x==0.0 || y==0.0){
+        if (x == 0.0 || y == 0.0) {
             System.out.println("no se ha seleccionado la ubicacion");
-        }else{
-        try{
-            String date = fecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            Double total = subT+5;
-            solicit = new Solicitud(pac, direccion.getText(), date, hora.getValue(), x, y, total);
-            solicit.escribirArchivo();
-            for(Prueba pru: tests){
-                solicit.detallarArchivo(pru);
+        } else {
+            try {
+                String date = fecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                Double total = subT + 5;
+                solicit = new Solicitud(pac, direccion.getText(), date, hora.getValue(), x, y, total);
+                solicit.escribirArchivo();
+                for (Prueba pru : tests) {
+                    solicit.detallarArchivo(pru);
+                }
+                String nombre = "";
+                for (String str : nombres) {
+                    nombre += "\n";
+                    nombre += str;
+
+                }
+                solicit.enviarCorreo(pac, nombre);
+
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("mensaje.fxml"));
+
+                vFinal.setScene(new Scene(fxmlLoader.load()));
+                vFinal.setTitle("Información final");
+
+                vFinal.show();
+
+            } catch (NullPointerException e) {
+                System.out.println("algunos espacios no han sido llenados");
             }
-            String nombre = "";
-            for(String str : nombres){
-                nombre+="\n";
-                nombre+=str;
-                
-            }
-            solicit.enviarCorreo(pac, nombre);
-            
-            
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "mensaje.fxml"));
-        
-            vFinal.setScene(new Scene(fxmlLoader.load()));
-            vFinal.setTitle("Información final");
-            
-            vFinal.show();
-            
-        }catch(NullPointerException e){
-            System.out.println("algunos espacios no han sido llenados");
+
         }
-     
-    }}
-    
+    }
+
 }
