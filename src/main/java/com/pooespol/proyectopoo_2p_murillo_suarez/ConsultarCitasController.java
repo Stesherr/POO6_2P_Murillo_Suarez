@@ -6,7 +6,6 @@
 package com.pooespol.proyectopoo_2p_murillo_suarez;
 
 
-import static com.pooespol.proyectopoo_2p_murillo_suarez.OpcionesPController.stage;
 import extraClases.Consolidado;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,14 +25,20 @@ import javafx.stage.Stage;
  */
 public class ConsultarCitasController implements Initializable {
 
-    
+    @FXML
     private VBox nombreVb;
     
+    @FXML
     private VBox apellidoVb;
     
+    @FXML
     private VBox fechaVb;
     
+    @FXML
     private VBox numSolicVb;
+    
+    @FXML
+    private Button cerrar;
     
     @FXML
     private VBox root;
@@ -57,6 +62,8 @@ public class ConsultarCitasController implements Initializable {
             fechaVb.getChildren().add(fecha);
             numSolicVb.getChildren().add(numSolic);
         }
+        
+
     }    
     
 }
