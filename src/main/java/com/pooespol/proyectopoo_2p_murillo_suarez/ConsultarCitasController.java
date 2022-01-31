@@ -10,6 +10,7 @@ import extraClases.Consolidado;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -45,7 +46,7 @@ public class ConsultarCitasController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // Lee el consolidado y lo muestra en pantalla
         ArrayList<Consolidado> consolidado = Consolidado.leerConsolidado();
         Label nombre;
         Label apellido;
@@ -63,6 +64,7 @@ public class ConsultarCitasController implements Initializable {
             numSolicVb.getChildren().add(numSolic);
         }
         
+        cerrar.setOnAction(e -> Platform.exit());
 
     }    
     

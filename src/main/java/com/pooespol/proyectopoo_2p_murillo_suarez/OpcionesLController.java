@@ -37,7 +37,6 @@ import javafx.stage.Stage;
  */
 public class OpcionesLController implements Initializable {
     
-    private static Stage stage;
     @FXML
     private Text bienvenido;
     @FXML
@@ -101,10 +100,10 @@ public class OpcionesLController implements Initializable {
     private void consultarCitas(ActionEvent event) throws IOException {
 
         if(mensage.getText().equalsIgnoreCase("Se ha generado el consolidado")){
-            stage = new Stage();
+            Stage stage = new Stage();
 
         
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("consultarCitas.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ConsultarCitas.fxml"));
         
             stage.setScene(new Scene(fxmlLoader.load()));
             stage.setTitle("Consultar Citas");
