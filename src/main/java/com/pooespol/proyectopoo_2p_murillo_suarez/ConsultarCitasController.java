@@ -26,23 +26,13 @@ import javafx.stage.Stage;
  */
 public class ConsultarCitasController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     
-    @FXML
-    private Button cerrar;
-    
-    @FXML
     private VBox nombreVb;
     
-    @FXML
     private VBox apellidoVb;
     
-    @FXML
     private VBox fechaVb;
     
-    @FXML
     private VBox numSolicVb;
     
     @FXML
