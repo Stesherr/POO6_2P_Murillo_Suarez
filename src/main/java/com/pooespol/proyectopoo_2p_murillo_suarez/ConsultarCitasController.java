@@ -9,6 +9,7 @@ package com.pooespol.proyectopoo_2p_murillo_suarez;
 import extraClases.Consolidado;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -48,12 +49,13 @@ public class ConsultarCitasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Lee el consolidado y lo muestra en pantalla
         ArrayList<Consolidado> consolidado = Consolidado.leerConsolidado();
+        Collections.sort(consolidado);
         Label nombre;
         Label apellido;
         Label fecha;
         Label numSolic;
         for(Consolidado cons : consolidado){
-            System.out.println(cons.getNombre());
+            
             nombre = new Label(cons.getNombre());
             apellido = new Label(cons.getApellido());
             fecha = new Label (cons.getFecha());

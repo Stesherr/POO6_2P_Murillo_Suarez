@@ -23,7 +23,7 @@ import java.util.ArrayList;
  *
  * @author Stefano
  */
-public class Consolidado implements Serializable{
+public class Consolidado implements Serializable,Comparable<Consolidado>{
     
     private String nombrePac;
     private String apellidoPac;
@@ -109,6 +109,11 @@ public class Consolidado implements Serializable{
         }
         
         
+    }
+
+    @Override
+    public int compareTo(Consolidado o) {
+        return this.getNombre().compareTo(o.getNombre());
     }
     
 }
